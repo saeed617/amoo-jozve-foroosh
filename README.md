@@ -23,7 +23,7 @@ source venv/bin/activate
 
 + install requirements
 ```
-pip install requirements/development.txt
+pip install -r requirements/development.txt
 ```
 
 + run `migrate` command
