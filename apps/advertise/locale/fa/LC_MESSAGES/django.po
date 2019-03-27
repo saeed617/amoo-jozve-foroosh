@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-27 19:38+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: models.py:9
+msgid "Public"
+msgstr "عمومی"
+
+#: models.py:10
+msgid "Computer Engineering"
+msgstr "مهندسی کامپیوتر"
+
+#: models.py:11
+msgid "Electrical Engineering"
+msgstr "مهندسی برق"
+
+#: models.py:18
+msgid "Pending"
+msgstr "در انتظار تایید"
+
+#: models.py:19
+msgid "Published"
+msgstr "تایید شده"
+
+#: models.py:20
+msgid "Closed"
+msgstr "بسته شده"
+
+#: models.py:23
+msgid "User"
+msgstr ""
+
+#: models.py:24
+msgid "Title"
+msgstr "عنوان"
+
+#: models.py:25
+msgid "Description"
+msgstr "توضیحات"
+
+#: models.py:27
+msgid "Expiration date"
+msgstr "تاریخ بسته شدن"
+
+#: models.py:28
+msgid "Price"
+msgstr "قیمت"
+
+#: models.py:29
+msgid "Major"
+msgstr "رشته تحصیلی"
+
+#: models.py:30
+msgid "Created at"
+msgstr "تاریخ ساخته شدن"
+
+#: models.py:31
+msgid "State"
+msgstr "وضعیت"
+
+#: models.py:32
+msgid "Page numbers"
+msgstr "تعداد صفحات"
+
+#: models.py:33
+msgid "Publisher"
+msgstr "ناشر"
+
+#: models.py:34
+msgid "Release year"
+msgstr "سال انتشار"
+
+#: models.py:45
+msgid "Advertise image"
+msgstr "تصویر آگهی"
