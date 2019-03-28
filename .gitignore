@@ -5,6 +5,7 @@
 venv/
 .idea/
 .idea/**
+media/
 
 ### Linux ###
 *~

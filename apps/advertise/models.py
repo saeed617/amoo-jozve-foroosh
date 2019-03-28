@@ -33,7 +33,7 @@ class Advertise(models.Model):
     publisher = models.CharField(max_length=100, null=True, blank=True, verbose_name=_('Publisher'))
     release_year = models.CharField(max_length=4, null=True, blank=True, verbose_name=_('Release year'))
 
-    # TODO: images, city
+    # TODO: city
 
     def __str__(self):
         return self.title
