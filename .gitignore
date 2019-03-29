@@ -5,6 +5,8 @@
 venv/
 .idea/
 .idea/**
+media/
+node_modules/
 
 ### Linux ###
 *~
