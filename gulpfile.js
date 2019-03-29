@@ -27,7 +27,7 @@ function jquery() {
 
 function noty_css() {
     return gulp.src(paths.dev.node + 'noty/lib/noty.css')
-        .pipe(cleanCSS()).pipe(gulp.dest(paths.productoin.vendor + 'noty'));
+        .pipe(cleanCSS()).pipe(rename('noty.min.css')).pipe(gulp.dest(paths.productoin.vendor + 'noty'));
 }
 
 const js = gulp.series(noty_js, jquery);
