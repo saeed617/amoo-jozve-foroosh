@@ -3,10 +3,14 @@
 <head>
     <title>{% block head_title %}{% endblock %}</title>
     <meta content="text/html" charset="UTF-8">
-    {# load stylesheets and scripts here #}
+    {# stylesheets  #}
     <link rel="stylesheet" href="{% static 'vendor/noty/noty.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/semantic/semantic.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/semantic/semantic.rtl.min.css' %}">
+    {# scripts #}
+    {# order matters jquery semantic #}
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'amoo-jozve-foroosh/js/test.js' %}"></script>
+    <script src="{% static 'vendor/semantic/semantic.min.js' %}"></script>
     <script src="{% static 'vendor/noty/noty.min.js' %}" type="text/javascript"></script>
     {% block extra_header %}{% endblock %}
 </head>
