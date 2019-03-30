@@ -9,31 +9,29 @@ var cleanCSS = require('gulp-clean-css');
 var paths = {
     dev: {
         node: 'node_modules/',
+        semantic: 'static-dev/semantic/'
     },
     productoin: {
         vendor: 'static/vendor/'
     }
 };
 
-function noty_js() {
-    return gulp.src(paths.dev.node + 'noty/lib/noty.min.js')
+
+gulp.task('build', function () {
+    // js
+    gulp.src(paths.dev.node + 'noty/lib/noty.min.js')
         .pipe(uglify()).pipe(gulp.dest(paths.productoin.vendor + 'noty'));
-}
+    gulp.src(paths.dev.node + 'jquery/dist/jquery.min.js')
+        .pipe(uglify()).pipe(gulp.dest(paths.productoin.vendor + 'jquery'));
+    gulp.src(paths.dev.semantic + 'dist/semantic.min.js')
+        .pipe(uglify()).pipe(gulp.dest(paths.productoin.vendor + 'semantic'));
 
-function jquery() {
-    return gulp.src(paths.dev.node + 'jquery/dist/jquery.min.js')
-        .pipe(uglify()).pipe(gulp.dest(paths.productoin.vendor + 'jquery'))
-}
 
-function noty_css() {
-    return gulp.src(paths.dev.node + 'noty/lib/noty.css')
+    // css
+    gulp.src(paths.dev.node + 'noty/lib/noty.css')
         .pipe(cleanCSS()).pipe(rename('noty.min.css')).pipe(gulp.dest(paths.productoin.vendor + 'noty'));
-}
+    gulp.src(paths.dev.semantic + 'dist/{themes/**,semantic*min.css}')
+        .pipe(gulp.dest(paths.productoin.vendor + 'semantic'));
+});
 
-const js = gulp.series(noty_js, jquery);
-const css = gulp.series(noty_css);
-
-exports.default = gulp.series(
-    js,
-    css
-);
+gulp.task('default', ['build']);
