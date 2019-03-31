@@ -1,0 +1,97 @@
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}
+{% block top_bar %}
+    <div class="ui top fixed borderless huge inverted menu">
+        <a class="header item">
+            <img src="{% static 'advertise/images/logo.png' %}" style="margin-left: 10px"/>
+            عمو جزوه فورش
+        </a>
+        <a class="active item">صفحه من</a> <a class="item">درباره ما</a>
+    </div>
+{% endblock %}
+{% block body %}
+    <div class="ui container" style="padding-top: 100px">
+        <div class="ui very relaxed stackable grid">
+            <div class="three wide column">
+                <div class="ui vertical menu">
+                    <a href="#" class="active item">همه</a>
+                    <a href="#" class="item">ریاضی</a>
+                    <a href="#" class="item">فیزیک</a>
+                    <a href="#" class="item">شیمی</a>
+                    <a href="#" class="item">کامپیوتر</a>
+                    <a href="#" class="item">اقتصاد</a>
+                    <a href="#" class="item">ادبیات</a>
+                    <a href="#" class="item">معارف</a>
+                </div>
+            </div>
+            <div class="thirteen wide column">
+                <div class="ui segment">
+                    <div class="ui form">
+                        <div class="three fields">
+                            <div class="field">
+                                <input type="text" placeholder="جستجو...">
+                            </div>
+                            <div class="field">
+                                <div class="ui search selection dropdown" id="major-dropdown">
+                                    <input type="hidden" name="major">
+                                    <div class="default text">همه</div>
+                                    <div class="menu">
+                                        <div class="item" data-value="1">کامپیوتر</div>
+                                        <div class="item" data-value="0">برق</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui search selection dropdown" id="university-dropdown">
+                                    <input type="hidden" name="university">
+                                    <div class="default text">انتخاب دانشگاه</div>
+                                    <div class="menu">
+                                        <div class="item" data-value="1">علم و صنعت</div>
+                                        <div class="item" data-value="0">صنعتی شریف</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <button class="ui blue button" type="submit">جستجو</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui hidden divider"></div>
+                <div class="ui stackable equal width grid">
+                    <div class="column">
+                        <div class="ui special cards">
+                            <div class="card">
+                                <div class="blurring dimmable image">
+                                    <div class="ui dimmer">
+                                        <div class="content">
+                                            <div class="center">
+                                                <div class="ui inverted button">نمایش آگهی</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <img src="{% static '/advertise/images/comercial/online.jpg' %}">
+                                </div>
+                                <div class="content">
+                                    <a class="header">الگوریتم دکتر نادری</a>
+                                    <div class="meta">
+                                        <span class="date">ترم بهار ۹۶</span>
+                                    </div>
+                                </div>
+                                <div class="extra content">
+                                    <a>
+                                        <i class="users icon"></i>
+                                        افزودن به سبد خرید
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#major-dropdown").dropdown({clearable: true});
+        $("#university-dropdown").dropdown({clearable: true});
+    </script>
+{% endblock %}
