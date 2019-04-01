@@ -1,9 +1,12 @@
-{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}{% load amoo_extras %}
+{% block head_title %}
+    {{ object.title }}
+{% endblock %}
 {% block body %}
     <div class="ui container" style="padding-top: 30px">
         <div class="ui stackable two column grid">
             <div class="ui column">
-                <h1 id="productName" class="ui header">اسم کالا</h1>
+                <h1 id="productName" class="ui header">{{ object.title }}</h1>
                 <button id="showInfoBtn" onclick="showSellerInfo()" class="ui red button">
                     دریافت اطلاعات فروشنده
                 </button>
@@ -21,15 +24,15 @@
                     </div>
                     <div class="item">
                         <div class="right floated content">
-                            رشته تحصیلی
+                            {{ object.get_major_display }}
                         </div>
                         <div class="content">
-                            نام رشته
+                            رشته
                         </div>
                     </div>
                     <div class="item">
                         <div class="right floated content">
-                            نام دانشگاه
+
                         </div>
                         <div class="content">
                             دانشگاه
@@ -45,14 +48,14 @@
                     </div>
                     <div class="item">
                         <div class="right floated content">
-                            ۲۰۰۰۰
+                            {{ object.price|persian_digits }}
                         </div>
                         <div class="content">
                             قیمت
                         </div>
                     </div>
-                    <p id="details" style="text-align: right; font-size: 1.25em">توضیحات <br>مربوط<br> به
-                        کالا
+                    <p id="details">
+                        {{ object.description }}
                     </p>
                 </div>
             </div>
