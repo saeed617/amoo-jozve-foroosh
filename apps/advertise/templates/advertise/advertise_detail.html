@@ -1,0 +1,73 @@
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}{% load amoo_extras %}
+{% block head_title %}
+    {{ object.title }}
+{% endblock %}
+{% block body %}
+    <div class="ui container" style="padding-top: 30px">
+        <div class="ui stackable two column grid">
+            <div class="ui column">
+                <h1 id="productName" class="ui header">{{ object.title }}</h1>
+                <button id="showInfoBtn" onclick="showSellerInfo()" class="ui red button">
+                    دریافت اطلاعات فروشنده
+                </button>
+                <div class="ui middle aligned divided large relaxed list">
+                    <div id="sellerInfo" class="item" style="display: none">
+                        <div class="right floated content">
+                            ۰۹۳۰۱۲۳۶۵۴۸۷۹
+                            <button class="ui small basic button">
+                                کپی
+                            </button>
+                        </div>
+                        <div class="content">
+                            شماره تماس
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="right floated content">
+                            {{ object.get_major_display }}
+                        </div>
+                        <div class="content">
+                            رشته
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="right floated content">
+
+                        </div>
+                        <div class="content">
+                            دانشگاه
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="right floated content">
+                            تهران نارمک
+                        </div>
+                        <div class="content">
+                            محل
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="right floated content">
+                            {{ object.price|persian_digits }}
+                        </div>
+                        <div class="content">
+                            قیمت
+                        </div>
+                    </div>
+                    <p id="details">
+                        {{ object.description }}
+                    </p>
+                </div>
+            </div>
+            <div class="column">
+                <img id="productImage" class="ui image" src="{% static 'advertise/images/jozve.jpg' %}"
+                     alt="Product Image">
+            </div>
+        </div>
+        <script>
+            function showSellerInfo() {
+                $('#sellerInfo').css('display', 'block');
+                $("#showInfoBtn").addClass('disabled');
+            }
+        </script>
+{% endblock body %}
