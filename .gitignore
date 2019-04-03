@@ -8,6 +8,9 @@ venv/
 media/
 node_modules/
 
+# direnv
+.envrc
+
 ### Linux ###
 *~
 
