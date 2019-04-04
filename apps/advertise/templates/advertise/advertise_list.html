@@ -48,13 +48,9 @@
                     </div>
                 </div>
                 <div class="ui hidden divider"></div>
-                <div class="ui stackable four column grid">
+                <div class="ui special cards">
                     {% for advertise in object_list %}
-                        <div class="column">
-                            <div class="ui special cards">
-                                {% include 'advertise/snippets/advertise_card.html' with advertise=advertise %}
-                            </div>
-                        </div>
+                        {% include 'advertise/snippets/advertise_card.html' with advertise=advertise %}
                     {% endfor %}
                 </div>
             </div>
