@@ -57,35 +57,10 @@
                     </div>
                 </div>
                 <div class="ui hidden divider"></div>
-                <div class="ui stackable four column grid">
-                    <div class="column">
-                        <div class="ui special cards">
-                            <div class="card">
-                                <div class="blurring dimmable image">
-                                    <div class="ui dimmer">
-                                        <div class="content">
-                                            <div class="center">
-                                                <div class="ui inverted button">نمایش آگهی</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <img src="{% static '/advertise/images/comercial/online.jpg' %}">
-                                </div>
-                                <div class="content">
-                                    <a class="header">الگوریتم دکتر نادری</a>
-                                    <div class="meta">
-                                        <span class="date">ترم بهار ۹۶</span>
-                                    </div>
-                                </div>
-                                <div class="extra content">
-                                    <a>
-                                        <i class="users icon"></i>
-                                        افزودن به سبد خرید
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="ui special cards">
+                    {% for advertise in object_list %}
+                        {% include 'advertise/snippets/advertise_card.html' with advertise=advertise %}
+                    {% endfor %}
                 </div>
             </div>
         </div>

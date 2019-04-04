@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<div class="card">
+    <div class="blurring dimmable image">
+        <div class="ui dimmer">
+            <div class="content">
+                <div class="center">
+                    <div class="ui inverted button">نمایش آگهی</div>
+                </div>
+            </div>
+        </div>
+        <img src="{% static '/advertise/images/jozve.jpg' %}">
+    </div>
+    <div class="content">
+        <a class="header" href="{% url 'advertise:detail' advertise.id %}">{{ advertise.title }}</a>
+        <div class="meta">
+            {% if advertise.release_year %}
+            <span class="date">{{ advertise.release_year }}</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="extra content">
+        <a>
+            <i class="users icon"></i>
+            افزودن به سبد خرید
+        </a>
+    </div>
+</div>
