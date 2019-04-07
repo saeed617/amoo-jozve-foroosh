@@ -1,0 +1,63 @@
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}
+{% block body %}
+    <div class="ui container">
+        <div class="ui very relaxed stackable grid">
+            <div class="three wide column">
+                <div class="ui vertical menu">
+                    <a href="#" class="active item">همه</a>
+                    <a href="#" class="item">ریاضی</a>
+                    <a href="#" class="item">فیزیک</a>
+                    <a href="#" class="item">شیمی</a>
+                    <a href="#" class="item">کامپیوتر</a>
+                    <a href="#" class="item">اقتصاد</a>
+                    <a href="#" class="item">ادبیات</a>
+                    <a href="#" class="item">معارف</a>
+                </div>
+            </div>
+            <div class="thirteen wide column">
+                <div class="ui segment">
+                    <div class="ui form">
+                        <div class="three fields">
+                            <div class="field">
+                                <input type="text" placeholder="جستجو...">
+                            </div>
+                            <div class="field">
+                                <div class="ui search selection dropdown" id="major-dropdown">
+                                    <input type="hidden" name="major">
+                                    <div class="default text">همه</div>
+                                    <div class="menu">
+                                        <div class="item" data-value="1">کامپیوتر</div>
+                                        <div class="item" data-value="0">برق</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui search selection dropdown" id="university-dropdown">
+                                    <input type="hidden" name="university">
+                                    <div class="default text">انتخاب دانشگاه</div>
+                                    <div class="menu">
+                                        <div class="item" data-value="1">علم و صنعت</div>
+                                        <div class="item" data-value="0">صنعتی شریف</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <button class="ui blue button" type="submit">جستجو</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui hidden divider"></div>
+                <div class="ui special cards">
+                    {% for advertise in object_list %}
+                        {% include 'advertise/snippets/advertise_card.html' with advertise=advertise %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#major-dropdown").dropdown({clearable: true});
+        $("#university-dropdown").dropdown({clearable: true});
+    </script>
+{% endblock %}

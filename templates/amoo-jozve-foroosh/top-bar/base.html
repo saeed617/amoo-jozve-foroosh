@@ -1,0 +1,17 @@
+{% load staticfiles %}
+{% load staticfiles %}{% load i18n %}
+<div class="ui borderless menu">
+    <div class="ui fluid container">
+        {% block logo %}
+            <a href="#" class="item">
+                <img src="{% static 'advertise/images/logo.png' %}"/>
+            </a>
+        {% endblock %}
+
+        {% block menu-right %}{% endblock %}
+
+        <div class="right menu">
+            {% block menu-left %}{% endblock menu-left %}
+        </div>
+    </div>
+</div>

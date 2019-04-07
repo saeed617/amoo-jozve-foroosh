@@ -1,0 +1,5 @@
+{% if request.user.is_authenticated %}
+    {% include 'amoo-jozve-foroosh/top-bar/login.html' %}
+{% else %}
+    {% include 'amoo-jozve-foroosh/top-bar/logout.html' %}
+{% endif %}
