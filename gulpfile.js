@@ -25,6 +25,8 @@ gulp.task('build', function () {
         .pipe(uglify()).pipe(gulp.dest(paths.productoin.vendor + 'jquery'));
     gulp.src(paths.dev.semantic + 'dist/semantic.min.js')
         .pipe(uglify()).pipe(gulp.dest(paths.productoin.vendor + 'semantic'));
+    gulp.src(paths.dev.node + 'clipboard/dist/clipboard.min.js')
+        .pipe(uglify()).pipe(gulp.dest(paths.productoin.vendor + 'clipboard'));
 
 
     // css

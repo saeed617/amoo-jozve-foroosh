@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/saeed617/amoo-jozve-foroosh#readme",
   "dependencies": {
+    "clipboard": "^2.0.4",
     "jquery": "^3.3.1",
     "noty": "^3.1.0",
     "semantic-ui": "^2.4.2"
