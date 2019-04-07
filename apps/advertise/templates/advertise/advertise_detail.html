@@ -1,6 +1,9 @@
-{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}{% load amoo_extras %}
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}{% load amoo_extras %}{% load i18n %}
 {% block head_title %}
     {{ object.title }}
+{% endblock %}
+{% block extra_header %}
+    <script src="{% static 'vendor/clipboard/clipboard.min.js' %}"></script>
 {% endblock %}
 {% block body %}
     <div class="ui container" style="padding-top: 30px">
@@ -13,10 +16,15 @@
                 <div class="ui middle aligned divided large relaxed list">
                     <div id="sellerInfo" class="item" style="display: none">
                         <div class="right floated content">
-                            ۰۹۳۰۱۲۳۶۵۴۸۷۹
-                            <button class="ui small basic button">
+                            <div class="ui mini input">
+                                <input type="text" value="۰۹۳۰۱۲۳۶۵۴۸۷۹" readonly id="phone"/>
+                            </div>
+                            <button class="ui small basic button" id="phone-cp-btn" data-clipboard-target="#phone">
                                 کپی
                             </button>
+                            <div class="ui mini top center popup transition hidden" id="cp-popup">
+                                {% trans 'Copied!' %}
+                            </div>
                         </div>
                         <div class="content">
                             شماره تماس
@@ -70,5 +78,10 @@
             $('#sellerInfo').css('display', 'block');
             $("#showInfoBtn").addClass('disabled');
         }
+
+        $(document).ready(function () {
+            let cb = new ClipboardJS('#phone-cp-btn');
+            $('#phone-cp-btn').popup({popup: $("#cp-popup"), on: 'click'});
+        })
     </script>
 {% endblock body %}
