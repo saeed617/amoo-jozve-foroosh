@@ -3,7 +3,7 @@
 <div class="ui borderless menu">
     <div class="ui fluid container">
         {% block logo %}
-            <a href="#" class="item">
+            <a href="{% url 'advertise:list' %}" class="item">
                 <img src="{% static 'advertise/images/logo.png' %}"/>
             </a>
         {% endblock %}
@@ -11,6 +11,11 @@
         {% block menu-right %}{% endblock %}
 
         <div class="right menu">
+            <div class="item">
+                <a href="{% url 'advertise:add_advertise' %}" class="ui green button">
+                    {% trans 'New advertise' %}
+                </a>
+            </div>
             {% block menu-left %}{% endblock menu-left %}
         </div>
     </div>
