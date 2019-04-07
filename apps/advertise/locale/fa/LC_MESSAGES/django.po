@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-27 19:38+0430\n"
+"POT-Creation-Date: 2019-04-07 19:46+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,3 +89,19 @@ msgstr "سال انتشار"
 #: models.py:45
 msgid "Advertise image"
 msgstr "تصویر آگهی"
+
+#: templates/advertise/new_advertise.html:6
+msgid "New advertise"
+msgstr "آگهی جدید"
+
+#: templates/advertise/new_advertise.html:11
+msgid "Add"
+msgstr ""
+
+#: views.py:31
+msgid "Advertise added successfully."
+msgstr "آگهی شما با موفقیت ثبت شد."
+
+#: views.py:34
+msgid "Please correct the following errors."
+msgstr "لطفا خطاهای موجود را تصحیح کنید."

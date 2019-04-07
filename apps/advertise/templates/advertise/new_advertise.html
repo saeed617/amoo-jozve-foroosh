@@ -1,0 +1,14 @@
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load semanticui %}{% load i18n %}
+
+{% block body %}
+    <div class="ui text container">
+        <h1 class="ui header">
+            {% trans 'New advertise' %}
+        </h1>
+        <form class="ui form" role="form" method="post" action="{% url 'advertise:add_advertise' %}">
+            {% csrf_token %}
+            {{ form|semanticui_form }}
+            <button type="submit" class="ui blue button">{% trans 'Add' %}</button>
+        </form>
+    </div>
+{% endblock %}
