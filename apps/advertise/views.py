@@ -1,9 +1,11 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
-
+import json
+from apps.advertise.models import Province, County
 from .models import Advertise
 from .forms import AdvertiseForm
 
@@ -33,5 +35,12 @@ def add_advertise(request):
         else:
             messages.add_message(request, messages.ERROR, _('Please correct the following errors.'))
     else:
+        if request.is_ajax():
+            province_id = request.GET.get("province_id")
+            data = {}
+            data['counties'] = json.dumps([dict(obj) for obj in County.objects.filter(province=province_id).values()])
+            return JsonResponse(data)
         form = AdvertiseForm()
-    return render(request, 'advertise/new_advertise.html', {'form': form})
+
+    options = Province.objects.all()
+    return render(request, 'advertise/new_advertise.html', {'form': form, 'options': options})
