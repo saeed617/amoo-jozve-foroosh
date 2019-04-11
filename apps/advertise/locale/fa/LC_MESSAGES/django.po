@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-07 19:46+0430\n"
+"POT-Creation-Date: 2019-04-12 02:28+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,90 +18,118 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: models.py:9
+#: models.py:7
+msgid "Province name"
+msgstr "نام استان"
+
+#: models.py:14
+msgid "Province"
+msgstr "استان"
+
+#: models.py:15
+msgid "County name"
+msgstr "نام شهرستان"
+
+#: models.py:25 models.py:54
+msgid "County"
+msgstr "شهرستان"
+
+#: models.py:27
+msgid "university name"
+msgstr "نام دانشگاه"
+
+#: models.py:39
 msgid "Public"
 msgstr "عمومی"
 
-#: models.py:10
+#: models.py:40
 msgid "Computer Engineering"
 msgstr "مهندسی کامپیوتر"
 
-#: models.py:11
+#: models.py:41
 msgid "Electrical Engineering"
 msgstr "مهندسی برق"
 
-#: models.py:18
+#: models.py:48
 msgid "Pending"
 msgstr "در انتظار تایید"
 
-#: models.py:19
+#: models.py:49
 msgid "Published"
 msgstr "تایید شده"
 
-#: models.py:20
+#: models.py:50
 msgid "Closed"
 msgstr "بسته شده"
 
-#: models.py:23
+#: models.py:53
 msgid "User"
 msgstr ""
 
-#: models.py:24
+#: models.py:55
+msgid "University"
+msgstr "دانشگاه"
+
+#: models.py:57
 msgid "Title"
 msgstr "عنوان"
 
-#: models.py:25
+#: models.py:58
 msgid "Description"
 msgstr "توضیحات"
 
-#: models.py:27
+#: models.py:60
 msgid "Expiration date"
 msgstr "تاریخ بسته شدن"
 
-#: models.py:28
+#: models.py:61
 msgid "Price"
 msgstr "قیمت"
 
-#: models.py:29
+#: models.py:62
 msgid "Major"
 msgstr "رشته تحصیلی"
 
-#: models.py:30
+#: models.py:63
 msgid "Created at"
 msgstr "تاریخ ساخته شدن"
 
-#: models.py:31
+#: models.py:64
 msgid "State"
 msgstr "وضعیت"
 
-#: models.py:32
+#: models.py:65
 msgid "Page numbers"
 msgstr "تعداد صفحات"
 
-#: models.py:33
+#: models.py:66
 msgid "Publisher"
 msgstr "ناشر"
 
-#: models.py:34
+#: models.py:67
 msgid "Release year"
 msgstr "سال انتشار"
 
-#: models.py:45
+#: models.py:76
 msgid "Advertise image"
 msgstr "تصویر آگهی"
 
-#: templates/advertise/new_advertise.html:6
+#: templates/advertise/advertise_detail.html:26
+msgid "Copied!"
+msgstr "کپی شد!"
+
+#: templates/advertise/new_advertise.html:16
 msgid "New advertise"
 msgstr "آگهی جدید"
 
-#: templates/advertise/new_advertise.html:11
+#: templates/advertise/new_advertise.html:24
 msgid "Add"
 msgstr ""
 
-#: views.py:31
+#: views.py:33
 msgid "Advertise added successfully."
 msgstr "آگهی شما با موفقیت ثبت شد."
 
-#: views.py:34
+#: views.py:36
 msgid "Please correct the following errors."
 msgstr "لطفا خطاهای موجود را تصحیح کنید."

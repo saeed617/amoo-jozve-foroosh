@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # apps
     'apps.utils',
     'apps.advertise',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
