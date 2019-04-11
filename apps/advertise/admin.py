@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Advertise, AdvertiseImage, Province, County
+from .models import Advertise, AdvertiseImage, Province, County, University
 
 
 @admin.register(Advertise)
@@ -15,3 +15,4 @@ class AdvertiseImageModelAdmin(admin.ModelAdmin):
 
 admin.site.register(County)
 admin.site.register(Province)
+admin.site.register(University)

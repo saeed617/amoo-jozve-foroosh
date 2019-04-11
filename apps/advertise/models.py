@@ -21,6 +21,18 @@ class County(models.Model):
         verbose_name_plural = 'Counties'
 
 
+class University(models.Model):
+    county = models.ForeignKey(County, on_delete=models.CASCADE, verbose_name=_('County'),
+                               related_name='universities')
+    name = models.CharField(max_length=50, verbose_name=_('university name'))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Universities'
+
+
 class Advertise(models.Model):
     PUBLIC = 'P'
     MAJOR_CHOICES = (
@@ -40,6 +52,8 @@ class Advertise(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('User'))
     county = models.OneToOneField(County, on_delete=models.SET_NULL, null=True, verbose_name=_('County'))
+    university = models.OneToOneField(University, on_delete=models.SET_NULL, verbose_name=_('University'),
+                                      blank=True, null=True)
     title = models.CharField(max_length=200, verbose_name=_('Title'))
     description = models.TextField(max_length=2000, verbose_name=_('Description'))
     expiration_date = models.DateTimeField(blank=True, null=True,
