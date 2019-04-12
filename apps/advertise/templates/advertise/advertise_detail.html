@@ -38,17 +38,19 @@
                             رشته
                         </div>
                     </div>
+                    {% if object.university %}
                     <div class="item">
                         <div class="right floated content">
-
+                            {{ object.university }}
                         </div>
                         <div class="content">
                             دانشگاه
                         </div>
                     </div>
+                    {% endif %}
                     <div class="item">
                         <div class="right floated content">
-                            تهران نارمک
+                            {{ object.county.province.name }} - {{ object.county.name }}
                         </div>
                         <div class="content">
                             محل
@@ -62,6 +64,17 @@
                             قیمت
                         </div>
                     </div>
+                    <div class="item">
+                        <div class="right floated content">
+                            {{ object.page_numbers|persian_digits }}
+                        </div>
+                        <div class="content">
+                            تعداد صفحات
+                        </div>
+                    </div>
+                <br/><br/>
+                توضیحات
+
                     <p id="details">
                         {{ object.description }}
                     </p>
