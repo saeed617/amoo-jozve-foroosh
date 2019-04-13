@@ -51,8 +51,8 @@ class Advertise(models.Model):
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('User'))
-    county = models.OneToOneField(County, on_delete=models.SET_NULL, null=True, verbose_name=_('County'))
-    university = models.OneToOneField(University, on_delete=models.SET_NULL, verbose_name=_('University'),
+    county = models.ForeignKey(County, on_delete=models.CASCADE, null=True, verbose_name=_('County'))
+    university = models.ForeignKey(University, on_delete=models.SET_NULL, verbose_name=_('University'),
                                       blank=True, null=True)
     title = models.CharField(max_length=200, verbose_name=_('Title'))
     description = models.TextField(max_length=2000, verbose_name=_('Description'))
