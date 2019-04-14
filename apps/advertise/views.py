@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, FormView
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
@@ -22,25 +23,19 @@ class AdvertiseDetailView(DetailView):
     model = Advertise
 
 
-def add_advertise(request):
-    if request.method == 'POST':
-        form = AdvertiseForm(request.POST)
-        if form.is_valid():
-            advertise = form.save(commit=False)
-            advertise.user = User.objects.first()
-            advertise.state = Advertise.PENDING
-            advertise.save()
-            messages.add_message(request, messages.SUCCESS, _('Advertise added successfully.'))
-            return redirect('advertise:list')
-        else:
-            messages.add_message(request, messages.ERROR, _('Please correct the following errors.'))
-    else:
-        if request.is_ajax():
-            province_id = request.GET.get("province_id")
-            data = {}
-            data['counties'] = json.dumps([dict(obj) for obj in County.objects.filter(province=province_id).values()])
-            return JsonResponse(data)
-        form = AdvertiseForm()
+class AddAdvertise(FormView):
+    template_name = 'advertise/new_advertise.html'
+    form_class = AdvertiseForm
+    success_url = reverse_lazy('advertise:list')
 
-    options = Province.objects.all()
-    return render(request, 'advertise/new_advertise.html', {'form': form, 'options': options})
+    def form_valid(self, form):
+        advertise = form.save(commit=False)
+        advertise.user = User.objects.first()
+        advertise.state = Advertise.PENDING
+        advertise.save()
+        messages.add_message(self.request, messages.SUCCESS, _('Advertise added successfully.'))
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, _('Please correct the following errors.'))
+        return super().form_invalid(form)

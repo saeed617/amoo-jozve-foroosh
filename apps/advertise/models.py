@@ -11,7 +11,8 @@ class Province(models.Model):
 
 
 class County(models.Model):
-    province = models.ForeignKey(Province, related_name="counties", verbose_name=_('Province'), on_delete=models.CASCADE)
+    province = models.ForeignKey(Province, related_name="counties", verbose_name=_('Province'),
+                                 on_delete=models.CASCADE)
     name = models.CharField(max_length=30, verbose_name=_('County name'))
 
     def __str__(self):
@@ -51,9 +52,9 @@ class Advertise(models.Model):
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('User'))
-    county = models.OneToOneField(County, on_delete=models.SET_NULL, null=True, verbose_name=_('County'))
-    university = models.OneToOneField(University, on_delete=models.SET_NULL, verbose_name=_('University'),
-                                      blank=True, null=True)
+    county = models.ForeignKey(County, on_delete=models.SET_NULL, null=True, verbose_name=_('County'))
+    university = models.ForeignKey(University, on_delete=models.SET_NULL, verbose_name=_('University'),
+                                   blank=True, null=True)
     title = models.CharField(max_length=200, verbose_name=_('Title'))
     description = models.TextField(max_length=2000, verbose_name=_('Description'))
     expiration_date = models.DateTimeField(blank=True, null=True,
