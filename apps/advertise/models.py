@@ -66,6 +66,7 @@ class Advertise(models.Model):
     page_numbers = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Page numbers'))
     publisher = models.CharField(max_length=100, null=True, blank=True, verbose_name=_('Publisher'))
     release_year = models.CharField(max_length=4, null=True, blank=True, verbose_name=_('Release year'))
+    description = models.TextField(max_length=2000, verbose_name=_('Description'))
 
     def __str__(self):
         return self.title
