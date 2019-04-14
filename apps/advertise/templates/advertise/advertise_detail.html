@@ -1,0 +1,100 @@
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}{% load amoo_extras %}{% load i18n %}
+{% block head_title %}
+    {{ object.title }}
+{% endblock %}
+{% block extra_header %}
+    <script src="{% static 'vendor/clipboard/clipboard.min.js' %}"></script>
+{% endblock %}
+{% block body %}
+    <div class="ui container" style="padding-top: 30px">
+        <div class="ui stackable two column mobile reversed grid">
+            <div class="ui column">
+                <h1 id="productName" class="ui header">{{ object.title }}</h1>
+                <button id="showInfoBtn" onclick="showSellerInfo()" class="ui red button">
+                    دریافت اطلاعات فروشنده
+                </button>
+                <div class="ui middle aligned divided large relaxed list">
+                    <div id="sellerInfo" class="item" style="display: none">
+                        <div class="right floated content">
+                            <div class="ui mini input">
+                                <input type="text" value="۰۹۳۰۱۲۳۶۵۴۸۷۹" readonly id="phone"/>
+                            </div>
+                            <button class="ui small basic button" id="phone-cp-btn" data-clipboard-target="#phone">
+                                کپی
+                            </button>
+                            <div class="ui mini top center popup transition hidden" id="cp-popup">
+                                {% trans 'Copied!' %}
+                            </div>
+                        </div>
+                        <div class="content">
+                            شماره تماس
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="right floated content">
+                            {{ object.get_major_display }}
+                        </div>
+                        <div class="content">
+                            رشته
+                        </div>
+                    </div>
+                    {% if object.university %}
+                    <div class="item">
+                        <div class="right floated content">
+                            {{ object.university }}
+                        </div>
+                        <div class="content">
+                            دانشگاه
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="item">
+                        <div class="right floated content">
+                            {{ object.county.province.name }} - {{ object.county.name }}
+                        </div>
+                        <div class="content">
+                            محل
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="right floated content">
+                            {{ object.price|persian_digits }}
+                        </div>
+                        <div class="content">
+                            قیمت
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="right floated content">
+                            {{ object.page_numbers|persian_digits }}
+                        </div>
+                        <div class="content">
+                            تعداد صفحات
+                        </div>
+                    </div>
+                <br/><br/>
+                توضیحات
+
+                    <p id="details">
+                        {{ object.description }}
+                    </p>
+                </div>
+            </div>
+            <div class="column">
+                <img id="productImage" class="ui image" src="{% static 'advertise/images/jozve.jpg' %}"
+                     alt="Product Image">
+            </div>
+        </div>
+    </div>
+    <script>
+        function showSellerInfo() {
+            $('#sellerInfo').css('display', 'block');
+            $("#showInfoBtn").addClass('disabled');
+        }
+
+        $(document).ready(function () {
+            let cb = new ClipboardJS('#phone-cp-btn');
+            $('#phone-cp-btn').popup({popup: $("#cp-popup"), on: 'click'});
+        })
+    </script>
+{% endblock body %}

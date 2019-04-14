@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-12 02:28+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: models.py:7
+msgid "Province name"
+msgstr "نام استان"
+
+#: models.py:14
+msgid "Province"
+msgstr "استان"
+
+#: models.py:15
+msgid "County name"
+msgstr "نام شهرستان"
+
+#: models.py:25 models.py:54
+msgid "County"
+msgstr "شهرستان"
+
+#: models.py:27
+msgid "university name"
+msgstr "نام دانشگاه"
+
+#: models.py:39
+msgid "Public"
+msgstr "عمومی"
+
+#: models.py:40
+msgid "Computer Engineering"
+msgstr "مهندسی کامپیوتر"
+
+#: models.py:41
+msgid "Electrical Engineering"
+msgstr "مهندسی برق"
+
+#: models.py:48
+msgid "Pending"
+msgstr "در انتظار تایید"
+
+#: models.py:49
+msgid "Published"
+msgstr "تایید شده"
+
+#: models.py:50
+msgid "Closed"
+msgstr "بسته شده"
+
+#: models.py:53
+msgid "User"
+msgstr ""
+
+#: models.py:55
+msgid "University"
+msgstr "دانشگاه"
+
+#: models.py:57
+msgid "Title"
+msgstr "عنوان"
+
+#: models.py:58
+msgid "Description"
+msgstr "توضیحات"
+
+#: models.py:60
+msgid "Expiration date"
+msgstr "تاریخ بسته شدن"
+
+#: models.py:61
+msgid "Price"
+msgstr "قیمت"
+
+#: models.py:62
+msgid "Major"
+msgstr "رشته تحصیلی"
+
+#: models.py:63
+msgid "Created at"
+msgstr "تاریخ ساخته شدن"
+
+#: models.py:64
+msgid "State"
+msgstr "وضعیت"
+
+#: models.py:65
+msgid "Page numbers"
+msgstr "تعداد صفحات"
+
+#: models.py:66
+msgid "Publisher"
+msgstr "ناشر"
+
+#: models.py:67
+msgid "Release year"
+msgstr "سال انتشار"
+
+#: models.py:76
+msgid "Advertise image"
+msgstr "تصویر آگهی"
+
+#: templates/advertise/advertise_detail.html:26
+msgid "Copied!"
+msgstr "کپی شد!"
+
+#: templates/advertise/new_advertise.html:16
+msgid "New advertise"
+msgstr "آگهی جدید"
+
+#: templates/advertise/new_advertise.html:24
+msgid "Add"
+msgstr ""
+
+#: views.py:33
+msgid "Advertise added successfully."
+msgstr "آگهی شما با موفقیت ثبت شد."
+
+#: views.py:36
+msgid "Please correct the following errors."
+msgstr "لطفا خطاهای موجود را تصحیح کنید."

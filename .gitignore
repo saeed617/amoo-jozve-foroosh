@@ -5,6 +5,11 @@
 venv/
 .idea/
 .idea/**
+media/
+node_modules/
+
+# direnv
+.envrc
 
 ### Linux ###
 *~
@@ -154,7 +159,6 @@ coverage.xml
 .pytest_cache/
 
 # Translations
-*.mo
 *.pot
 
 # Django stuff:
