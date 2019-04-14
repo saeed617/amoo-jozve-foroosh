@@ -41,7 +41,7 @@
         {% for message in messages %}
             new Noty({
                 text: "{{ message }}",
-                type: "success"
+                type: "info"
             }).show();
         {% endfor %}
         $('.semantic-dropdown').dropdown();
