@@ -1,6 +1,6 @@
 from django import forms
 
-from semanticuiform.widgets import SemanticSearchSelect
+from semanticuiform.widgets import SemanticSearchSelect, SemanticSearchSelect
 
 from .models import Advertise
 
@@ -11,4 +11,6 @@ class AdvertiseForm(forms.ModelForm):
         exclude = ('user', 'state', 'expiration_date')
         widgets = {
             'major': SemanticSearchSelect,
+            'county': SemanticSearchSelect,
+            'university': SemanticSearchSelect,
         }
