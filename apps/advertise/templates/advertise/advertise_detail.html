@@ -4,6 +4,8 @@
 {% endblock %}
 {% block extra_header %}
     <script src="{% static 'vendor/clipboard/clipboard.min.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 {% endblock %}
 {% block body %}
     <div class="ui container" style="padding-top: 30px">
@@ -81,8 +83,11 @@
                 </div>
             </div>
             <div class="column">
-                <img id="productImage" class="ui image" src="{% static 'advertise/images/jozve.jpg' %}"
-                     alt="Product Image">
+                <div class="bxslider" id="slider">
+                    <div><img class="ui image" src="src1.jpg"></div>
+                    <div><img class="ui image" src="src2.jpg"></div>
+                    <div><img class="ui image" src="src3.jpg"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -96,5 +101,13 @@
             let cb = new ClipboardJS('#phone-cp-btn');
             $('#phone-cp-btn').popup({popup: $("#cp-popup"), on: 'click'});
         })
+    </script>
+    <script>
+        $('.bxslider').bxSlider({
+            mode: 'fade',
+            auto: true,
+            stopAutoOnClick: true,
+            slideWidth: parent
+        });
     </script>
 {% endblock body %}
