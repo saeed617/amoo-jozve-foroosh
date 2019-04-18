@@ -35,8 +35,12 @@ gulp.task('build', function () {
         .pipe(cleanCSS()).pipe(rename('noty.min.css')).pipe(gulp.dest(paths.productoin.vendor + 'noty'));
     gulp.src(paths.dev.semantic + 'dist/{themes/**,semantic*min.css}')
         .pipe(gulp.dest(paths.productoin.vendor + 'semantic'));
-    gulp.src(paths.dev.node + 'bxslider/dist/jquery.bxslider.css')
+    gulp.src(paths.dev.node + 'bxslider/dist/jquery.bxslider.min.css')
         .pipe(cleanCSS()).pipe(rename('bxslider.min.css')).pipe(gulp.dest(paths.productoin.vendor + 'bxslider'));
+
+    // images
+    gulp.src(paths.dev.node + 'bxslider/dist/images/*')
+        .pipe(gulp.dest(paths.productoin.vendor + 'bxslider/images'));
 });
 
 gulp.task('default', ['build']);
