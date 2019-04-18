@@ -4,8 +4,8 @@
 {% endblock %}
 {% block extra_header %}
     <script src="{% static 'vendor/clipboard/clipboard.min.js' %}"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="{% static 'vendor/bxslider/bxslider.min.css' %}">
+    <script src="{% static 'vendor/bxslider/bxslider.min.js' %}"></script>
 {% endblock %}
 {% block body %}
     <div class="ui container" style="padding-top: 30px">
@@ -41,14 +41,14 @@
                         </div>
                     </div>
                     {% if object.university %}
-                    <div class="item">
-                        <div class="right floated content">
-                            {{ object.university }}
+                        <div class="item">
+                            <div class="right floated content">
+                                {{ object.university }}
+                            </div>
+                            <div class="content">
+                                دانشگاه
+                            </div>
                         </div>
-                        <div class="content">
-                            دانشگاه
-                        </div>
-                    </div>
                     {% endif %}
                     <div class="item">
                         <div class="right floated content">
@@ -74,8 +74,8 @@
                             تعداد صفحات
                         </div>
                     </div>
-                <br/><br/>
-                توضیحات
+                    <br/><br/>
+                    توضیحات
 
                     <p id="details">
                         {{ object.description }}
@@ -84,9 +84,9 @@
             </div>
             <div class="column">
                 <div class="bxslider" id="slider">
-                    <div><img class="ui image" src="src1.jpg"></div>
-                    <div><img class="ui image" src="src2.jpg"></div>
-                    <div><img class="ui image" src="src3.jpg"></div>
+                    {% for img in object.advertiseimage_set.all %}
+                        <div><img class="ui image" src={{ img.image.url }}></div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -100,14 +100,13 @@
         $(document).ready(function () {
             let cb = new ClipboardJS('#phone-cp-btn');
             $('#phone-cp-btn').popup({popup: $("#cp-popup"), on: 'click'});
+
+            $('.bxslider').bxSlider({
+                mode: 'fade',
+                auto: true,
+                stopAutoOnClick: true,
+                slideWidth: parent
+            });
         })
-    </script>
-    <script>
-        $('.bxslider').bxSlider({
-            mode: 'fade',
-            auto: true,
-            stopAutoOnClick: true,
-            slideWidth: parent
-        });
     </script>
 {% endblock body %}
