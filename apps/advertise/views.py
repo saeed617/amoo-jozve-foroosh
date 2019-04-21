@@ -28,6 +28,12 @@ class AddAdvertise(FormView):
     form_class = AdvertiseForm
     success_url = reverse_lazy('advertise:list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['provinces'] = Province.objects.all()
+        return context
+
+
     def form_valid(self, form):
         advertise = form.save(commit=False)
         advertise.user = User.objects.first()
