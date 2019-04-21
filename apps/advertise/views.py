@@ -19,17 +19,21 @@ class AdvertiseListView(ListView):
     def get_queryset(self):
         major = self.request.GET.get('major')
         university = self.request.GET.get('university')
-        if university:
-            university = int(university)
+        province = self.request.GET.get('province')
         county = self.request.GET.get('county')
-        if county:
-            county = int(county)
+
         qs = Advertise.objects.all()
         if major:
-            qs = qs.filter(Q(major=major))
+            qs = qs.filter(major=major)
         if university:
+            university = int(university)
             qs = qs.filter(university__id=university)
+        if not county:
+            if province:
+                province = int(province)
+                qs = qs.filter(county__province__id=province)
         if county:
+            county = int(county)
             qs = qs.filter(county__id=county)
         return qs
 
