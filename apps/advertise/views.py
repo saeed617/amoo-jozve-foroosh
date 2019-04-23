@@ -13,6 +13,7 @@ from .forms import AdvertiseForm
 
 class AdvertiseListView(ListView):
     template_name = 'advertise/advertise_list.html'
+    paginate_by = 12
 
     def get_queryset(self):
         return Advertise.objects.all()

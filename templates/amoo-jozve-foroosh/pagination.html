@@ -1,0 +1,26 @@
+{% load amoo_extras %}
+{% if page_obj.paginator.num_pages > 1 %}
+    <div class="ui pagination menu">
+        {% if page_obj.has_previous %}
+            <a rel="prev" href="?page={{ page_obj.previous_page_number }}" class="item">
+                <i class="right chevron icon"></i> <span>قبلی</span>
+            </a>
+        {% else %}
+            <div class="disabled item">
+                <i class="right chevron icon"></i> <span>قبلی</span>
+            </div>
+        {% endif %}
+        <div class="active item">
+            {{ page_obj.number|persian_digits }}
+        </div>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="item">
+                <span>بعدی</span> <i class="left chevron icon"></i>
+            </a>
+        {% else %}
+            <div class="disabled item">
+                <span class="hide-in-mobile">بعدی</span> <i class="left chevron icon lefticon"></i>
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

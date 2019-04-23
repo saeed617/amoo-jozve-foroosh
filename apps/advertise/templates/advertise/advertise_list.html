@@ -19,15 +19,40 @@
                     <div class="ui form">
                         <div class="three fields">
                             <div class="field">
-                                <input type="text" placeholder="جستجو...">
+                                <div class="ui search selection dropdown" id="province-dropdown">
+                                    <input type="hidden" name="province" id="province-id">
+
+                                    <div class="default text">انتخاب استان</div>
+                                    <div class="menu">
+
+                                        {% for province in provinces %}
+                                            <div class="item" data-value="{{ province.id }}">{{ province.name }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
                             </div>
+                            <div class="field">
+                                <div class="ui search selection dropdown" id="county-dropdown">
+                                    <input type="hidden" name="county">
+                                    <div class="default text">انتخاب شهر</div>
+                                    <div class="menu" id="county-options">
+
+                                        {% for county in counties %}
+                                            <div class="item" data-value="{{ county.id }}">{{ county.name }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="field">
                                 <div class="ui search selection dropdown" id="major-dropdown">
                                     <input type="hidden" name="major">
                                     <div class="default text">همه</div>
                                     <div class="menu">
-                                        <div class="item" data-value="1">کامپیوتر</div>
-                                        <div class="item" data-value="0">برق</div>
+
+                                        {% for major in majors %}
+                                            <div class="item" data-value="{{ major.0 }}">{{ major.1 }}</div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -35,9 +60,11 @@
                                 <div class="ui search selection dropdown" id="university-dropdown">
                                     <input type="hidden" name="university">
                                     <div class="default text">انتخاب دانشگاه</div>
-                                    <div class="menu">
-                                        <div class="item" data-value="1">علم و صنعت</div>
-                                        <div class="item" data-value="0">صنعتی شریف</div>
+                                    <div class="menu transition">
+                                        {% for university in universities %}
+                                            <div class="item"
+                                                 data-value="{{ university.id }}">{{ university.name }}</div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -53,11 +80,41 @@
                         {% include 'advertise/snippets/advertise_card.html' with advertise=advertise %}
                     {% endfor %}
                 </div>
+                <div style="text-align: center; margin-top: 15px    ">
+                    {% include 'amoo-jozve-foroosh/pagination.html' with page_obj=page_obj %}
+                </div>
             </div>
         </div>
     </div>
     <script>
         $("#major-dropdown").dropdown({clearable: true});
         $("#university-dropdown").dropdown({clearable: true});
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#province-id").change(function () {
+                var province = $('#province-id').val();
+                var countyOptions = $('#county-options');
+                countyOptions.empty();
+
+                $.ajax({
+                    url: '{% url 'advertise:filter-counties' %}',
+                    data: {
+                        'province': province
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data) {
+                            $('#county-dropdown').dropdown('clear');
+                            $.each(data, function (index, element) {
+                                var option = '<div class="item" data-value=' + element.id + '>' + element.name + '</div>';
+                                countyOptions.append(option);
+                            });
+                        }
+                    }
+                });
+
+            });
+        });
     </script>
 {% endblock %}
