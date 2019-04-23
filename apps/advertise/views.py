@@ -1,16 +1,14 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from django.core import serializers
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, FormView
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
-import json
 from apps.advertise.models import Province, County, University
 from .models import Advertise
 from .forms import AdvertiseForm
-from django.db.models import Q
 
 
 class AdvertiseListView(ListView):
@@ -64,7 +62,7 @@ def filter_cities(request):
         return JsonResponse({"message": "Invalid province"})
 
 
-class AddAdvertise(FormView):
+class AddAdvertise(LoginRequiredMixin, FormView):
     template_name = 'advertise/new_advertise.html'
     form_class = AdvertiseForm
     success_url = reverse_lazy('advertise:list')
@@ -73,7 +71,6 @@ class AddAdvertise(FormView):
         context = super().get_context_data(**kwargs)
         context['provinces'] = Province.objects.all()
         return context
-
 
     def form_valid(self, form):
         advertise = form.save(commit=False)
