@@ -15,6 +15,7 @@ from django.db.models import Q
 
 class AdvertiseListView(ListView):
     template_name = 'advertise/advertise_list.html'
+    paginate_by = 12
 
     def get_queryset(self):
         major = self.request.GET.get('major')
