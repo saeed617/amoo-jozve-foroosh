@@ -4,19 +4,28 @@
 
 
     <div class="ui text container" style="margin: 30px;">
-{#        <label for="province">{% trans 'Province' %}</label><br/>#}
-{#        <select id="province" class="ui search dropdown">#}
-{#            <option value="">---------</option>#}
-{#            {% for province in options %}#}
-{#                <option value="{{ province.id }}">{{ province.name }}</option>#}
-{#            {% endfor %}#}
-{#        </select>#}
 
 
 
         <h1 class="ui header">
             {% trans 'New advertise' %}
         </h1>
+
+
+        <div class="field">
+            <div class="ui search selection dropdown" id="province-dropdown">
+                <input type="hidden" id="province-id">
+
+                <div class="default text">انتخاب استان</div>
+                <div class="menu">
+
+                    {% for province in provinces %}
+                    <div class="item" data-value="{{ province.id }}">{{ province.name }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    <br/>
 
 
 
@@ -27,33 +36,35 @@
         </form>
     </div>
 
-
     <script>
-    $(document).ready(function() {
-        $("#province").change(function () {
-            var province_id = $(this).val();
+        $("#province-dropdown").dropdown({clearable: true});
+    </script>
+    <script>
+    $(document).ready(function(){
+        $("#province-id").change(function () {
+          var province = $('#province-id').val();
+          var countyOptions = $('#id_county');
+          countyOptions.empty();
 
-            $.ajax({
-                url: '/advertise/add/',
-                dataType: "json",
-                data: {
-                    'province_id': province_id
-                },
+         $.ajax({
+            url: '{% url 'advertise:filter-counties' %}',
+            data: {
+              'province': province
+            },
+            dataType: 'json',
+            success: function (data) {
+              if (data) {
+                  $('#id_county').dropdown('clear');
+                  countyOptions.append(new Option('---------',''));
+                  $.each(data, function(index, element) {
+                    var option = new Option(element.name, element.id);
+                    countyOptions.append(option);
+});
+              }
+            }
+          });
 
-                success:function(data){
-                    var county_field = $('#id_county');
-                    county_field.empty();
-                    county_field.append(new Option("---------", ""));
-                    $.each(JSON.parse(data.counties),function(index,value) {
-                            var o = new Option(value.name, value.id);
-                            county_field.append(o);
-
-                    });
-                }
-
-            });
-
-        });
+    });
     });
     </script>
 {% endblock %}
