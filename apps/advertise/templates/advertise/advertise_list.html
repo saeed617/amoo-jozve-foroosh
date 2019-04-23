@@ -1,4 +1,4 @@
-{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}{% load i18n %}
 {% block body %}
     <div class="ui container">
         <div class="ui very relaxed stackable grid">
@@ -14,30 +14,60 @@
                     <a href="#" class="item">معارف</a>
                 </div>
             </div>
+
             <div class="thirteen wide column">
-                <div class="ui segment">
-                    <div class="ui form">
+                <div class="ui segment" style="display: inline-block">
+                    <form action="." class="ui form">
                         <div class="three fields">
                             <div class="field">
-                                <input type="text" placeholder="جستجو...">
-                            </div>
-                            <div class="field">
-                                <div class="ui search selection dropdown" id="major-dropdown">
-                                    <input type="hidden" name="major">
-                                    <div class="default text">همه</div>
+                                <div class="ui search selection dropdown" id="province-dropdown">
+                                    <input type="hidden" name="province" id="province-id">
+
+                                    <div class="default text">انتخاب استان</div>
                                     <div class="menu">
-                                        <div class="item" data-value="1">کامپیوتر</div>
-                                        <div class="item" data-value="0">برق</div>
+
+                                        {% for province in provinces %}
+                                        <div class="item" data-value="{{ province.id }}">{{ province.name }}</div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="field">
+                                <div class="ui search selection dropdown" id="county-dropdown">
+                                    <input type="hidden" name="county">
+                                    <div class="default text">انتخاب شهر</div>
+                                    <div class="menu" id="county-options">
+
+                                        {% for county in counties %}
+                                        <div class="item" data-value="{{ county.id }}">{{ county.name }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="ui search selection dropdown" id="major-dropdown">
+                                    <input type="hidden" name="major">
+                                    <div class="default text">انتخاب رشته</div>
+                                    <div class="menu">
+
+                                        {% for major in majors %}
+                                        <div class="item" data-value="{{ major.0 }}">{{ major.1 }}</div>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <div class="field">
                                 <div class="ui search selection dropdown" id="university-dropdown">
                                     <input type="hidden" name="university">
                                     <div class="default text">انتخاب دانشگاه</div>
-                                    <div class="menu">
-                                        <div class="item" data-value="1">علم و صنعت</div>
-                                        <div class="item" data-value="0">صنعتی شریف</div>
+                                    <div class="menu transition">
+                                        {% for university in universities %}
+                                        <div class="item" data-value="{{ university.id }}">{{ university.name }}</div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +75,7 @@
                                 <button class="ui blue button" type="submit">جستجو</button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="ui hidden divider"></div>
                 <div class="ui special cards">
@@ -59,5 +89,34 @@
     <script>
         $("#major-dropdown").dropdown({clearable: true});
         $("#university-dropdown").dropdown({clearable: true});
+        $("#county-dropdown").dropdown({clearable: true});
+        $("#province-dropdown").dropdown({clearable: true});
+    </script>
+    <script>
+    $(document).ready(function(){
+        $("#province-id").change(function () {
+          var province = $('#province-id').val();
+          var countyOptions = $('#county-options');
+          countyOptions.empty();
+
+         $.ajax({
+            url: '{% url 'advertise:filter-counties' %}',
+            data: {
+              'province': province
+            },
+            dataType: 'json',
+            success: function (data) {
+              if (data) {
+                  $('#county-dropdown').dropdown('clear');
+                  $.each(data, function(index, element) {
+                    var option = '<div class="item" data-value='+element.id+'>'+element.name+'</div>';
+                    countyOptions.append(option);
+});
+              }
+            }
+          });
+
+    });
+    });
     </script>
 {% endblock %}
