@@ -1,14 +1,12 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, FormView
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from apps.advertise.models import Province, County, University
 from .models import Advertise
-from .forms import AdvertiseForm
+from .forms import AdvertiseForm, AdvertiseImageFormSet
 
 
 class AdvertiseListView(ListView):
@@ -70,13 +68,25 @@ class AddAdvertise(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['provinces'] = Province.objects.all()
+        if self.request.POST:
+            context['image_formset'] = AdvertiseImageFormSet(self.request.POST, self.request.FILES)
+        else:
+            context['image_formset'] = AdvertiseImageFormSet()
         return context
 
     def form_valid(self, form):
         advertise = form.save(commit=False)
-        advertise.user = User.objects.first()
+        advertise.user = self.request.user
         advertise.state = Advertise.PENDING
         advertise.save()
+        context = self.get_context_data()
+        advertise_image_formset = context['image_formset']
+        advertise_image_formset.instance = advertise
+        for form in advertise_image_formset.forms:
+            if form.is_valid():
+                image = form.save(commit=False)
+                image.advertise = advertise
+                image.save()
         messages.add_message(self.request, messages.SUCCESS, _('Advertise added successfully.'))
         return super().form_valid(form)
 
