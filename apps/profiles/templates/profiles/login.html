@@ -1,0 +1,23 @@
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load semanticui %}{% load i18n %}
+
+{% block body %}
+<div class="ui text container" style="margin: 30px;">
+    {% for error in errors %}
+    <p>{{ error }}</p>
+    {% endfor %}
+
+
+
+    <form class="ui form" role="form" method="post" action="{% url 'profiles:login' %}">
+    {% csrf_token %}
+    {{ form|semanticui_form }}
+
+    <input type="submit" class="ui blue button" value="{% trans 'Login' %}">
+    <input type="hidden" name="next" value="{{ next }}">
+    </form>
+
+    {# Assumes you setup the password_reset view in your URLconf #}
+    {# <p><a href="{% url 'password_reset' %}">Lost password?</a></p> #}
+</div>
+
+{% endblock %}

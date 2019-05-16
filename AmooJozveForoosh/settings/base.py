@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # apps
     'apps.utils',
     'apps.advertise',
+    'apps.profiles',
     'django_extensions',
 ]
 
@@ -120,6 +121,9 @@ USE_TZ = True
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+LOGIN_URL = '/profiles/login/'
+LOGIN_REDIRECT_URL = '/advertise/'
 
 STATIC_URL = '/static/'
 

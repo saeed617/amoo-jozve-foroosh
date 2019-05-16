@@ -3,3 +3,8 @@
 {% block menu-right %}
     <a class="active item">صفحه من</a>
 {% endblock %}
+
+{% block menu-left %}
+    <a class="item" href="{% url 'profiles:login' %}">ورود</a>
+    <a class="item" href="{% url 'profiles:sign_up' %}">ثبت نام</a>
+{% endblock %}

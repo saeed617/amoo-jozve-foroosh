@@ -1,5 +1,9 @@
 {% extends 'amoo-jozve-foroosh/top-bar/base.html' %}
 
 {% block menu-right %}
-    <a class="active item">صفحه من</a>
+    <a class="item">آگهی‌های من</a>
+{% endblock %}
+
+{% block menu-left %}
+    <a class="item" href="{% url 'profiles:logout' %}">خروج</a>
 {% endblock %}
