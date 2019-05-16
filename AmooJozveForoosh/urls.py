@@ -21,6 +21,7 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^advertise/', include('apps.advertise.urls')),
+    url(r'^profiles/', include('apps.profiles.urls')),
 ]
 
 if settings.DEBUG:

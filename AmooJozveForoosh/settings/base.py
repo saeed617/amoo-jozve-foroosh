@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # apps
     'apps.utils',
     'apps.advertise',
+    'apps.profiles',
     'django_extensions',
 ]
 
@@ -120,6 +121,9 @@ USE_TZ = True
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+LOGIN_URL = '/profiles/login/'
+LOGIN_REDIRECT_URL = '/advertise/'
 
 STATIC_URL = '/static/'
 
