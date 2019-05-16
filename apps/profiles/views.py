@@ -2,9 +2,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate, login, logout
 from .forms import AuthenticationForm
-from django.http.response import HttpResponse
 from .forms import UserCreationForm
 
 
@@ -33,3 +32,8 @@ def authenticate_view(request):
             errors.append("اطلاعات وارد شده معتبر نیست")
 
     return render(request, template_name, context={'form': form, 'errors': errors})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('advertise:list')

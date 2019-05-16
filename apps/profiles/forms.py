@@ -8,8 +8,6 @@ class AuthenticationForm(forms.Form):
     password = forms.CharField(label=_('Password'), widget=forms.PasswordInput)
 
 
-
-
 class UserCreationForm(forms.ModelForm):
     """
     A form that creates a user, with no privileges, from the given username and
@@ -22,7 +20,7 @@ class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label=_("Password"),
                                 widget=forms.PasswordInput)
     password2 = forms.CharField(label=_("Password confirmation"),
-                                widget=forms.PasswordInput,)
+                                widget=forms.PasswordInput, )
 
     class Meta:
         model = User

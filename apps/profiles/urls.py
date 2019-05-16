@@ -1,10 +1,10 @@
 from django.conf.urls import url
-from django.contrib.auth.views import LoginView
-from .views import UserCreationView, authenticate_view
+from . import views as auth_views
 
 app_name = 'profiles'
 urlpatterns = [
-   url(r'^login/$', authenticate_view, name='login'),
-   url(r'^sign-up/$', UserCreationView.as_view(), name='sign_up'),
+    url(r'^login/$', auth_views.authenticate_view, name='login'),
+    url(r'^sign-up/$', auth_views.UserCreationView.as_view(), name='sign_up'),
+    url(r'^logout/$', auth_views.logout_view, name='logout'),
 
 ]
