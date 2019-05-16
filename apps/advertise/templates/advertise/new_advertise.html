@@ -1,10 +1,13 @@
-{% extends 'amoo-jozve-foroosh/base.html' %}{% load semanticui %}{% load i18n %}
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load semanticui %}{% load i18n %}{% load static %}
 
+{% block extra_header %}
+    {{ block.super }}
+    <script src="{% static 'vendor/jquery-formset.js' %}"></script>
+{% endblock %}
 {% block body %}
 
 
     <div class="ui text container" style="margin: 30px;">
-
 
 
         <h1 class="ui header">
@@ -12,26 +15,32 @@
         </h1>
 
 
-        <div class="field">
-            <div class="ui search selection dropdown" id="province-dropdown">
+        <div class="required field">
+            <label for="id_county">استان</label>
+            <div class="ui search selection dropdown" id="province-dropdown" style="width: 100%;">
                 <input type="hidden" id="province-id">
 
                 <div class="default text">انتخاب استان</div>
                 <div class="menu">
 
                     {% for province in provinces %}
-                    <div class="item" data-value="{{ province.id }}">{{ province.name }}</div>
+                        <div class="item" data-value="{{ province.id }}">{{ province.name }}</div>
                     {% endfor %}
                 </div>
             </div>
         </div>
-    <br/>
-
-
-
-        <form class="ui form" role="form" method="post" action="{% url 'advertise:add_advertise' %}">
+        <br/>
+        <form class="ui form" role="form" method="post" action="{% url 'advertise:add_advertise' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|semanticui_form }}
+            {{ image_formset.management_form }}
+            {% for form in image_formset %}
+                <div class="inline two fields" id="image-formset">
+                    {{ form|semanticui_form }}
+                </div>
+            {% endfor %}
+            <br/>
+            <br/>
             <button type="submit" class="ui blue button">{% trans 'Add' %}</button>
         </form>
     </div>
@@ -40,31 +49,37 @@
         $("#province-dropdown").dropdown({clearable: true});
     </script>
     <script>
-    $(document).ready(function(){
-        $("#province-id").change(function () {
-          var province = $('#province-id').val();
-          var countyOptions = $('#id_county');
-          countyOptions.empty();
+        $(document).ready(function () {
+            $("#province-id").change(function () {
+                var province = $('#province-id').val();
+                var countyOptions = $('#id_county');
+                countyOptions.empty();
 
-         $.ajax({
-            url: '{% url 'advertise:filter-counties' %}',
-            data: {
-              'province': province
-            },
-            dataType: 'json',
-            success: function (data) {
-              if (data) {
-                  $('#id_county').dropdown('clear');
-                  countyOptions.append(new Option('---------',''));
-                  $.each(data, function(index, element) {
-                    var option = new Option(element.name, element.id);
-                    countyOptions.append(option);
-});
-              }
-            }
-          });
+                $.ajax({
+                    url: '{% url 'advertise:filter-counties' %}',
+                    data: {
+                        'province': province
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data) {
+                            $('#id_county').dropdown('clear');
+                            countyOptions.append(new Option('---------', ''));
+                            $.each(data, function (index, element) {
+                                var option = new Option(element.name, element.id);
+                                countyOptions.append(option);
+                            });
+                        }
+                    }
+                });
 
-    });
-    });
+            });
+
+            $('#image-formset').formset({
+                prefix: '{{ image_formset.prefix }}',
+                addText: '{% trans 'Add another image' %}',
+                deleteText: '{% trans 'Delete image' %}',
+            });
+        });
     </script>
 {% endblock %}
