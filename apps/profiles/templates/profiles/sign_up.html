@@ -4,13 +4,86 @@
 <div class="ui text container" style="margin: 30px;">
 
     <form class="ui form" role="form" method="post" action="{% url 'profiles:sign_up' %}">
-    {% csrf_token %}
-    {{ form|semanticui_form }}
+        {% csrf_token %}
+        {{ form|semanticui_form }}
 
-    <input type="submit" class="ui blue button" value="{% trans 'Sign_up' %}">
-    <input type="hidden" name="next" value="{{ next }}">
+        <input type="submit" class="ui blue button" value="{% trans 'Sign_up' %}">
+        <input type="hidden" name="next" value="{{ next }}">
     </form>
 
 </div>
+<script>
 
+    // ready event
+    readyV = function() {
+
+        // selector cache
+        var
+            $form = $('.ui.form'),
+            // alias
+            handler
+        ;
+
+        // event handlers
+        handler = {
+
+        };
+
+
+        $.fn.form.settings.defaults = {
+            email: {
+                identifier : 'email',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'ایمیل را وارد کنید'
+                    },
+                    {
+                        type   : 'email',
+                        prompt : 'یک ایمیل معتبر وارد کنید'
+                    }
+                ]
+            },
+            password1: {
+                identifier : 'password1',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'گذرواژه را وارد کنید'
+                    },
+                    {
+                        type   : 'length[4]',
+                        prompt : 'گذرواژه حداقل باید دارای ۴ کاراکتر باشد'
+                    }
+                ]
+            },
+            password2: {
+                identifier : 'password2',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'گذرواژه را تکرار کنید'
+                    },
+                    {
+                        type   : 'match[password1]',
+                        prompt : 'گذرواژه همخوانی ندارد'
+                    }
+                ]
+            }
+        };
+
+
+        $form
+            .form({
+                inline : true,
+                on: 'blur'
+            })
+        ;
+
+    };
+    // attach ready event
+    $(document)
+        .ready(readyV)
+    ;
+</script>
 {% endblock %}
