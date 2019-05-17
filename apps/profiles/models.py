@@ -9,7 +9,7 @@ User = get_user_model()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=False, verbose_name=_('Active'))
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     # extra fields

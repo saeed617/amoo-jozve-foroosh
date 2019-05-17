@@ -1,10 +1,23 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views as auth_views
+from django.contrib.auth.views import (PasswordResetCompleteView, PasswordResetConfirmView,
+                                       PasswordResetDoneView, PasswordResetView)
 
-app_name = 'profiles'
-urlpatterns = [
+patterns = [
     url(r'^login/$', auth_views.authenticate_view, name='login'),
     url(r'^sign-up/$', auth_views.UserCreationView.as_view(), name='sign_up'),
     url(r'^logout/$', auth_views.logout_view, name='logout'),
 
+]
+
+urlpatterns = [
+    url(r'^password-reset/$', PasswordResetView.as_view(
+        template_name='profiles/password_reset.html'), name='password_reset'),
+    url(r'^password-reset/done$', PasswordResetDoneView.as_view(
+        template_name='profiles/password_reset_done.html'), name='password_reset_done'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', PasswordResetConfirmView.as_view(
+        template_name='profiles/password_reset_confirm.html'), name='password_reset_confirm'),
+    url(r'^reset/done/$', PasswordResetCompleteView.as_view(
+        template_name='profiles/password_reset_complete.html'), name='password_reset_complete'),
+    url(r'^', include(patterns, namespace='profiles')),
 ]
