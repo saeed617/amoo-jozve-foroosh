@@ -29,4 +29,4 @@ def post_save_receiver(sender, instance,created, *args, **kwargs):
 
 
 pre_save.connect(pre_save_receiver, sender=User)
-post_save.connect(pre_save_receiver, sender=User)
+post_save.connect(post_save_receiver, sender=User)
