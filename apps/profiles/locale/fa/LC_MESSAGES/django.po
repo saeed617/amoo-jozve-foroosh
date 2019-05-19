@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-16 20:23+0430\n"
+"POT-Creation-Date: 2019-05-17 22:03+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,25 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: forms.py:7 forms.py:18
+#: forms.py:7 forms.py:16
 msgid "Email"
-msgstr ""
+msgstr "ایمیل"
 
-#: forms.py:8 forms.py:22
+#: forms.py:8 forms.py:20
 msgid "Password"
-msgstr ""
+msgstr "رمز عبور"
 
-#: forms.py:20
+#: forms.py:18
 msgid "The two password fields didn't match."
-msgstr ""
+msgstr "عدم مطابقت "
 
-#: forms.py:24
+#: forms.py:22
 msgid "Password confirmation"
-msgstr ""
+msgstr "تایید رمز عبور"
+
+#: models.py:12
+msgid "Active"
+msgstr "فعال"
 
 #: templates/profiles/login.html:15
+#: templates/profiles/password_reset_complete.html:4
 msgid "Login"
 msgstr "ورود"
+
+#: templates/profiles/password_reset.html:10
+msgid "Send"
+msgstr "ارسال"
+
+#: templates/profiles/password_reset_confirm.html:8
+msgid "Ok"
+msgstr "تایید"
 
 #: templates/profiles/sign_up.html:10
 msgid "Sign_up"
