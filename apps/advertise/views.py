@@ -32,7 +32,7 @@ class AdvertiseListView(ListView):
         if county:
             county = int(county)
             qs = qs.filter(county__id=county)
-        return qs
+        return qs.order_by('-created_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
