@@ -1,4 +1,3 @@
-{% load staticfiles %}
 {% load staticfiles %}{% load i18n %}
 <div class="ui borderless menu">
     <div class="ui fluid container">
@@ -11,12 +10,12 @@
         {% block menu-right %}{% endblock %}
 
         <div class="right menu">
+            {% block menu-left %}{% endblock menu-left %}
             <div class="item">
                 <a href="{% url 'advertise:add_advertise' %}" class="ui green button">
                     {% trans 'New advertise' %}
                 </a>
             </div>
-            {% block menu-left %}{% endblock menu-left %}
         </div>
     </div>
 </div>

@@ -1,0 +1,56 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-17 22:03+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: forms.py:7 forms.py:16
+msgid "Email"
+msgstr "ایمیل"
+
+#: forms.py:8 forms.py:20
+msgid "Password"
+msgstr "رمز عبور"
+
+#: forms.py:18
+msgid "The two password fields didn't match."
+msgstr "عدم مطابقت "
+
+#: forms.py:22
+msgid "Password confirmation"
+msgstr "تایید رمز عبور"
+
+#: models.py:12
+msgid "Active"
+msgstr "فعال"
+
+#: templates/profiles/login.html:15
+#: templates/profiles/password_reset_complete.html:4
+msgid "Login"
+msgstr "ورود"
+
+#: templates/profiles/password_reset.html:10
+msgid "Send"
+msgstr "ارسال"
+
+#: templates/profiles/password_reset_confirm.html:8
+msgid "Ok"
+msgstr "تایید"
+
+#: templates/profiles/sign_up.html:10
+msgid "Sign_up"
+msgstr "ثبت نام"

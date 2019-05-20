@@ -1,4 +1,4 @@
-{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}{% load i18n %}
 {% block body %}
     <div class="ui container">
         <div class="ui very relaxed stackable grid">
@@ -14,9 +14,10 @@
                     <a href="#" class="item">معارف</a>
                 </div>
             </div>
+
             <div class="thirteen wide column">
-                <div class="ui segment">
-                    <div class="ui form">
+                <div class="ui segment" style="display: inline-block">
+                    <form action="." class="ui form">
                         <div class="three fields">
                             <div class="field">
                                 <div class="ui search selection dropdown" id="province-dropdown">
@@ -31,6 +32,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="field">
                                 <div class="ui search selection dropdown" id="county-dropdown">
                                     <input type="hidden" name="county">
@@ -47,15 +49,17 @@
                             <div class="field">
                                 <div class="ui search selection dropdown" id="major-dropdown">
                                     <input type="hidden" name="major">
-                                    <div class="default text">همه</div>
+                                    <div class="default text">انتخاب رشته</div>
                                     <div class="menu">
 
                                         {% for major in majors %}
                                             <div class="item" data-value="{{ major.0 }}">{{ major.1 }}</div>
                                         {% endfor %}
                                     </div>
+
                                 </div>
                             </div>
+
                             <div class="field">
                                 <div class="ui search selection dropdown" id="university-dropdown">
                                     <input type="hidden" name="university">
@@ -72,7 +76,7 @@
                                 <button class="ui blue button" type="submit">جستجو</button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="ui hidden divider"></div>
                 <div class="ui special cards">
@@ -89,6 +93,8 @@
     <script>
         $("#major-dropdown").dropdown({clearable: true});
         $("#university-dropdown").dropdown({clearable: true});
+        $("#county-dropdown").dropdown({clearable: true});
+        $("#province-dropdown").dropdown({clearable: true});
     </script>
     <script>
         $(document).ready(function () {

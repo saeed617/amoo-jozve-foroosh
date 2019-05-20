@@ -1,0 +1,85 @@
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load semanticui %}{% load i18n %}
+
+{% block body %}
+<div class="ui text container" style="margin: 30px;">
+    {% for error in errors %}
+    <p>{{ error }}</p>
+    {% endfor %}
+
+
+
+    <form class="ui form segment" role="form" method="post" action="{% url 'profiles:login' %}">
+        {% csrf_token %}
+        {{ form|semanticui_form }}
+
+        <input type="submit" class="ui blue button" value="{% trans 'Login' %}">
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="ui error message"></div>
+    </form>
+
+
+    <p><a href="{% url 'password_reset' %}">رمز عبور را فراموش کرده اید؟</a></p>
+</div>
+<script>
+
+    // ready event
+    readyV = function() {
+
+        // selector cache
+        var
+            $form = $('.ui.form'),
+            // alias
+            handler
+        ;
+
+        // event handlers
+        handler = {
+
+        };
+
+
+        $.fn.form.settings.defaults = {
+            email: {
+                identifier : 'email',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'ایمیل را وارد کنید'
+                    },
+                    {
+                        type   : 'regExp',
+                        value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        prompt : 'یک ایمیل معتبر وارد کنید'
+                    }
+                ]
+            },
+            password: {
+                identifier : 'password',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'گذرواژه را وارد کنید'
+                    },
+                    {
+                        type   : 'length[8]',
+                        prompt : 'گذرواژه حداقل باید دارای ۸ کاراکتر باشد'
+                    }
+                ]
+            }
+        };
+
+
+        $form
+            .form({
+                inline : true,
+                on: 'blur'
+            })
+        ;
+
+    };
+    // attach ready event
+    $(document)
+        .ready(readyV)
+    ;
+</script>
+{% endblock %}
