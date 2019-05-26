@@ -83,7 +83,7 @@ class AdvertiseImage(models.Model):
 class Comment(models.Model):
     advertise = models.ForeignKey(Advertise, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='comments', null=True)
-    text = models.TextField(verbose_name=_('Text'), max_length=2000)
+    text = models.TextField(verbose_name=_('Text'), max_length=500)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)

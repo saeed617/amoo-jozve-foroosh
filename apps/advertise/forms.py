@@ -3,7 +3,7 @@ from django.forms import inlineformset_factory
 
 from semanticuiform.widgets import SemanticSearchSelect
 
-from apps.advertise.models import County, AdvertiseImage
+from apps.advertise.models import County, AdvertiseImage, Comment
 from .models import Advertise
 
 
@@ -28,6 +28,12 @@ class AdvertiseImageForm(forms.ModelForm):
     class Meta:
         model = AdvertiseImage
         fields = ('image',)
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text', )
 
 
 AdvertiseImageFormSet = inlineformset_factory(Advertise, AdvertiseImage, form=AdvertiseImageForm, extra=1,
