@@ -1,10 +1,12 @@
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, FormView
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, DetailView, FormView, CreateView
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
-from apps.advertise.models import Province, County, University
+
+from apps.advertise.forms import CommentForm
+from apps.advertise.models import Province, County, University, Comment
 from .models import Advertise
 from .forms import AdvertiseForm, AdvertiseImageFormSet
 
@@ -46,6 +48,12 @@ class AdvertiseListView(ListView):
 class AdvertiseDetailView(DetailView):
     template_name = 'advertise/advertise_detail.html'
     model = Advertise
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CommentForm(None)
+        context['comments'] = Comment.objects.filter(advertise__id=self.get_object().pk)
+        return context
 
 
 def filter_cities(request):
@@ -93,3 +101,23 @@ class AddAdvertise(LoginRequiredMixin, FormView):
     def form_invalid(self, form):
         messages.add_message(self.request, messages.ERROR, _('Please correct the following errors.'))
         return super().form_invalid(form)
+
+
+class CommentCreateView(LoginRequiredMixin, FormView):
+    form_class = CommentForm
+
+    def get_success_url(self):
+        return reverse('advertise:detail', args=(self.kwargs.get('pk')))
+
+    def form_valid(self, form):
+        comment = form.save(commit=False)
+        comment.author = self.request.user
+        comment.advertise = Advertise.objects.get(pk=int(self.kwargs.get('pk')))
+        comment.save()
+        messages.add_message(self.request, messages.SUCCESS, _('Your comment successfully added.'))
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, _('Please correct the following errors.'))
+        return super().form_invalid(form)
+
