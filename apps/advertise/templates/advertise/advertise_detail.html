@@ -122,7 +122,7 @@
     {% endif %}
 
     {% for cm in comments %}
-        {{ cm }}
+        {% include 'advertise/snippets/comment.html' with cm=cm %}
         <br/>
 
     {% endfor %}

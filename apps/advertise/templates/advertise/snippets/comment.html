@@ -1,0 +1,14 @@
+{% load staticfiles%}
+<div class="ui comments">
+  <div class="comment">
+    <div class="content">
+      <a class="author">{{ cm.author.email }}</a>
+      <div class="metadata">
+        <div class="date">{{ cm.timestamp }}</div>
+      <div class="text">
+        {{ cm.text }}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
