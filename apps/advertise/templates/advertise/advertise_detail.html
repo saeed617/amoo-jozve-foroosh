@@ -66,6 +66,7 @@
                         قیمت
                     </div>
                 </div>
+                {% if object.page_numbers is not None %}
                 <div class="item">
                     <div class="right floated content">
                         {{ object.page_numbers|persian_digits }}
@@ -74,6 +75,7 @@
                         تعداد صفحات
                     </div>
                 </div>
+                {% endif %}
                 <div class="item">
                     <div class="right floated content">
                         <div class='ui star rating' id="itemRate"></div>
