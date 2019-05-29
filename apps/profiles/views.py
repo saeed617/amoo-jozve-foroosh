@@ -19,7 +19,7 @@ from .forms import UserCreationForm
 class UserCreationView(CreateView):
     form_class = UserCreationForm
     template_name = 'profiles/sign_up.html'
-    success_url = reverse_lazy('advertise:list')
+    success_url = reverse_lazy('profiles:activation')
 
     def form_valid(self, form):
         user = form.save()
@@ -87,3 +87,7 @@ def activate(request, uidb64, token):
     else:
         messages.add_message(request, messages.ERROR, _('Activation link is invalid!'))
         return redirect(reverse('advertise:list'))
+
+
+def wait_activation(request):
+    return render(request, 'profiles/wait_activation.html')
