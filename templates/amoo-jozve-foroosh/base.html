@@ -7,6 +7,8 @@
     {# stylesheets  #}
     <link rel="stylesheet" href="{% static 'vendor/noty/noty.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/semantic/semantic.rtl.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     {# scripts #}
     {# order matters jquery semantic #}
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
@@ -48,6 +50,7 @@
     {% endblock %}
     {% block body %}{% endblock %}
     {% block footer %}
+        {% include 'amoo-jozve-foroosh/footer/footer.html' %}
     {% endblock footer %}
 </div>
 <script>
