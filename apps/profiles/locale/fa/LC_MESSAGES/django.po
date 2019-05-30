@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-17 22:03+0430\n"
+"POT-Creation-Date: 2019-05-29 15:02+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgid "Active"
 msgstr "فعال"
 
 #: templates/profiles/login.html:15
-#: templates/profiles/password_reset_complete.html:4
+#: templates/profiles/password_reset_complete.html:5
 msgid "Login"
 msgstr "ورود"
 
@@ -54,3 +54,11 @@ msgstr "تایید"
 #: templates/profiles/sign_up.html:10
 msgid "Sign_up"
 msgstr "ثبت نام"
+
+#: views.py:81
+msgid "Your account email successfully activated."
+msgstr "ایمیل اکانت شما با موفقیت فعال شد"
+
+#: views.py:85
+msgid "Activation link is invalid!"
+msgstr "لینک فعال سازی نامعتبر است!"

@@ -1,4 +1,4 @@
-{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}{% load amoo_extras %}{% load i18n %}
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}{% load amoo_extras %}{% load i18n %}{% load semanticui %}
 {% block head_title %}
 {{ object.title }}
 {% endblock %}
@@ -66,6 +66,7 @@
                         قیمت
                     </div>
                 </div>
+                {% if object.page_numbers is not None %}
                 <div class="item">
                     <div class="right floated content">
                         {{ object.page_numbers|persian_digits }}
@@ -74,6 +75,7 @@
                         تعداد صفحات
                     </div>
                 </div>
+                {% endif %}
                 <div class="item">
                     <div class="right floated content">
                         <div class='ui star rating' id="itemRate"></div>
@@ -110,6 +112,22 @@
             </div>
         </div>
     </div>
+    <br/>
+    <br/>
+    {% if request.user.is_authenticated %}
+     <form class="ui form" role="form" method="post" action="{% url 'advertise:add_comment' pk=object.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|semanticui_form }}
+            <button type="submit" class="ui blue button">{% trans 'Add' %}</button>
+     </form>
+    <hr/>
+    {% endif %}
+
+    {% for cm in comments %}
+        {{ cm }}
+        <br/>
+
+    {% endfor %}
 </div>
 <script>
     function showSellerInfo() {
