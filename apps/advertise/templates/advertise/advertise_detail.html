@@ -112,20 +112,21 @@
     </div>
     <br/>
     <br/>
-    {% if request.user.is_authenticated %}
-     <form class="ui form" role="form" method="post" action="{% url 'advertise:add_comment' pk=object.id %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form|semanticui_form }}
-            <button type="submit" class="ui blue button">{% trans 'Add' %}</button>
-     </form>
-    <hr/>
-    {% endif %}
-
-    {% for cm in comments %}
+    <div class="ui comments">
+        <h3 class="ui dividing header">نظرات</h3>
+        {% for cm in comments %}
         {% include 'advertise/snippets/comment.html' with cm=cm %}
-        <br/>
 
-    {% endfor %}
+        {% endfor %}
+    </div>
+    {% if request.user.is_authenticated %}
+    <form class="ui form" role="form" method="post" action="{% url 'advertise:add_comment' pk=object.id %}"
+          enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|semanticui_form }}
+        <button type="submit" class="ui blue button">{% trans 'Add' %}</button>
+    </form>
+    {% endif %}
 </div>
 <script>
     function showSellerInfo() {
@@ -158,7 +159,7 @@
         initialRating: 4,
         maxRating: 5,
         clearable: false,
-        onRate: function(value) {
+        onRate: function (value) {
             console.log('value set to:' + value);
         },
 
@@ -168,8 +169,7 @@
     ;
 </script>
 <script>
-    function showRating()
-    {
+    function showRating() {
         document.getElementById("rate").style.display = "inline";
         $('#rate').rating('enable');
     }
