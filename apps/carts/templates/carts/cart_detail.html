@@ -1,0 +1,12 @@
+{% extends 'amoo-jozve-foroosh/base.html' %}
+
+{% block body %}
+{% for advertise in object.advertises.all %}
+    {# things to show per advertise in cart #}
+    <p>{{ advertise.title }}</p>
+    <form method="post" action="{% url 'carts:remove_from_cart' %}">{% csrf_token %}
+        <input type="hidden" name="ad_id" value="{{ advertise.id }}">
+    <button type="submit">remove from cart</button>
+    </form>
+{% endfor %}
+{% endblock body %}

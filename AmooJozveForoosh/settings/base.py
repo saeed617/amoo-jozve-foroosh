@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.advertise',
     'apps.profiles',
     'django_extensions',
+    'apps.carts',
 ]
 
 MIDDLEWARE = [

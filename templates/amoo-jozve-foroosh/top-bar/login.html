@@ -2,6 +2,8 @@
 
 {% block menu-right %}
     <a class="item">آگهی‌های من</a>
+    {# ui for cart icon here #}
+    <a class="item" href="{% url 'carts:detail' request.user.cart.id %}"> کارت{{ request.user.cart.advertises.all.count }} </a>
 {% endblock %}
 
 {% block menu-left %}
