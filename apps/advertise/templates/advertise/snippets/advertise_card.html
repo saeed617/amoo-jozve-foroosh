@@ -25,7 +25,7 @@
     {% if advertise not in request.user.cart.advertises.all and request.user.is_authenticated %}
     <form method="post" action="{% url 'carts:add_to_cart' %}">{% csrf_token %}
         <input type="hidden" name="ad_id" value="{{ advertise.id }}">
-        <button type="submit">add to cart</button>
+        <button class = "ui primary button" type="submit">add to cart</button>
     </form>
     {% endif %}
     {# end cart ui button #}
