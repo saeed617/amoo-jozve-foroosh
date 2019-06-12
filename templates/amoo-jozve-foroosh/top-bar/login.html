@@ -1,11 +1,18 @@
 {% extends 'amoo-jozve-foroosh/top-bar/base.html' %}
 
 {% block menu-right %}
-    <a class="item">آگهی‌های من</a>
-    {# ui for cart icon here #}
-    <a class="item" href="{% url 'carts:detail' request.user.cart.id %}"> کارت{{ request.user.cart.advertises.all.count }} </a>
+<a class="item">آگهی‌های من</a>
+{# ui for cart icon here #}
+
+<a class="item" href="{% url 'carts:detail' request.user.cart.id %}">
+    <div class="ui grey labeled icon button">
+        <i class="shopping cart icon"></i>
+        <div class="detail">{{ request.user.cart.advertises.all.count }}</div>
+    </div>
+</a>
+
 {% endblock %}
 
 {% block menu-left %}
-    <a class="item" href="{% url 'profiles:logout' %}">خروج</a>
+<a class="item" href="{% url 'profiles:logout' %}">خروج</a>
 {% endblock %}
