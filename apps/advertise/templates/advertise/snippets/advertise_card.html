@@ -17,11 +17,17 @@
             <span class="date">{{ advertise.release_year }}</span>
             {% endif %}
         </div>
+
+
     </div>
     <div class="extra content">
-        <a>
-            <i class="users icon"></i>
-            افزودن به سبد خرید
-        </a>
+        {# cart ui button add to cart #}
+    {% if advertise not in request.user.cart.advertises.all and request.user.is_authenticated %}
+    <form method="post" action="{% url 'carts:add_to_cart' %}">{% csrf_token %}
+        <input type="hidden" name="ad_id" value="{{ advertise.id }}">
+        <button class = "ui primary button" type="submit">add to cart</button>
+    </form>
+    {% endif %}
+    {# end cart ui button #}
     </div>
 </div>

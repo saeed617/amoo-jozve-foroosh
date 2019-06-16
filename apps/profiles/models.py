@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.signals import pre_save, post_save
 from django.utils.translation import ugettext_lazy as _
+
+from apps.carts.models import Cart
 from apps.utils.uuname import unique_username_generator
 
 User = get_user_model()
@@ -26,6 +28,7 @@ def pre_save_receiver(sender, instance, *args, **kwargs):
 def post_save_receiver(sender, instance,created, *args, **kwargs):
     if created:
         profile, is_created = Profile.objects.get_or_create(user=instance)
+        cart, is_created = Cart.objects.get_or_create(user=instance)
 
 
 pre_save.connect(pre_save_receiver, sender=User)
