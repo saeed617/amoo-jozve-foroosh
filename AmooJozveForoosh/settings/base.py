@@ -37,11 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # external
     'semanticuiform',
+    'django_extensions',
     # apps
     'apps.utils',
     'apps.advertise',
     'apps.profiles',
+    'apps.landpage',
     'django_extensions',
+    'apps.carts',
 ]
 
 MIDDLEWARE = [

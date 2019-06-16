@@ -19,9 +19,11 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+    url(r'^', include('apps.landpage.urls', namespace='landpage')),
     url(r'^admin/', admin.site.urls),
     url(r'^advertise/', include('apps.advertise.urls')),
     url(r'^profiles/', include('apps.profiles.urls')),
+    url(r'^cart/', include('apps.carts.urls'))
 ]
 
 if settings.DEBUG:

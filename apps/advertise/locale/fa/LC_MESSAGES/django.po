@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-17 01:19+0430\n"
+"POT-Creation-Date: 2019-05-26 22:40+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,17 +114,22 @@ msgstr "سال انتشار"
 msgid "Advertise image"
 msgstr "تصویر آگهی"
 
+#: models.py:86
+msgid "Text"
+msgstr "متن"
+
 #: templates/advertise/advertise_detail.html:28
 msgid "Copied!"
 msgstr "کپی شد!"
 
+#: templates/advertise/advertise_detail.html:119
+#: templates/advertise/new_advertise.html:44
+msgid "Add"
+msgstr "افزودن"
+
 #: templates/advertise/new_advertise.html:14
 msgid "New advertise"
 msgstr "آگهی جدید"
-
-#: templates/advertise/new_advertise.html:44
-msgid "Add"
-msgstr ""
 
 #: templates/advertise/new_advertise.html:80
 msgid "Add another image"
@@ -134,10 +139,14 @@ msgstr "اضافه کردن تصویر دیگر"
 msgid "Delete image"
 msgstr "حذف تصویر"
 
-#: views.py:89
+#: views.py:98
 msgid "Advertise added successfully."
 msgstr "آگهی شما با موفقیت ثبت شد."
 
-#: views.py:93
+#: views.py:102 views.py:122
 msgid "Please correct the following errors."
 msgstr "لطفا خطاهای موجود را تصحیح کنید."
+
+#: views.py:118
+msgid "Your comment successfully added."
+msgstr "نظر شما با موفقیت ثبت شد."

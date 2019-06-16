@@ -2,20 +2,24 @@
 
 {% block body %}
 <div class="ui text container" style="margin: 30px;">
-
-    <form class="ui form" role="form" method="post" action="{% url 'profiles:sign_up' %}">
+    <div class="ui attached message">
+        <p>برای ثبت نام فرم زیر را پر کنید</p>
+    </div>
+    <form class="ui form attached fluid segment" role="form" method="post" action="{% url 'profiles:sign_up' %}">
         {% csrf_token %}
         {{ form|semanticui_form }}
-
         <input type="submit" class="ui blue button" value="{% trans 'Sign_up' %}">
         <input type="hidden" name="next" value="{{ next }}">
     </form>
-
+    <div class="ui bottom attached warning message">
+        <i class="icon help"></i>
+        در صورتی که قبلا ثبت نام کردید از<a href="{% url 'profiles:login' %}">اینجا</a> وارد شوید .
+    </div>
 </div>
 <script>
 
     // ready event
-    readyV = function() {
+    readyV = function () {
 
         // selector cache
         var
@@ -25,49 +29,47 @@
         ;
 
         // event handlers
-        handler = {
-
-        };
+        handler = {};
 
 
         $.fn.form.settings.defaults = {
             email: {
-                identifier : 'email',
+                identifier: 'email',
                 rules: [
                     {
-                        type   : 'empty',
-                        prompt : 'ایمیل را وارد کنید'
+                        type: 'empty',
+                        prompt: 'ایمیل را وارد کنید'
                     },
                     {
-                        type   : 'regExp',
+                        type: 'regExp',
                         value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                        prompt : 'یک ایمیل معتبر وارد کنید'
+                        prompt: 'یک ایمیل معتبر وارد کنید'
                     }
                 ]
             },
             password1: {
-                identifier : 'password1',
+                identifier: 'password1',
                 rules: [
                     {
-                        type   : 'empty',
-                        prompt : 'گذرواژه را وارد کنید'
+                        type: 'empty',
+                        prompt: 'گذرواژه را وارد کنید'
                     },
                     {
-                        type   : 'length[8]',
-                        prompt : 'گذرواژه حداقل باید دارای ۸ کاراکتر باشد'
+                        type: 'length[8]',
+                        prompt: 'گذرواژه حداقل باید دارای ۸ کاراکتر باشد'
                     }
                 ]
             },
             password2: {
-                identifier : 'password2',
+                identifier: 'password2',
                 rules: [
                     {
-                        type   : 'empty',
-                        prompt : 'گذرواژه را تکرار کنید'
+                        type: 'empty',
+                        prompt: 'گذرواژه را تکرار کنید'
                     },
                     {
-                        type   : 'match[password1]',
-                        prompt : 'گذرواژه همخوانی ندارد'
+                        type: 'match[password1]',
+                        prompt: 'گذرواژه همخوانی ندارد'
                     }
                 ]
             }
@@ -76,7 +78,7 @@
 
         $form
             .form({
-                inline : true,
+                inline: true,
                 on: 'blur'
             })
         ;
