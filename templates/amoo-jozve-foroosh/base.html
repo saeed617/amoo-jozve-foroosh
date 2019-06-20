@@ -15,7 +15,7 @@
     <script src="{% static 'vendor/semantic/semantic.min.js' %}"></script>
     <script src="{% static 'vendor/noty/noty.min.js' %}" type="text/javascript"></script>
     <style>
-        @font-face {
+        {% comment %} @font-face {
             font-family: 'yekan';
             src: url('http://cdn.font-store.ir/fonts/yekan/Yekan-Regular.woff2') format('woff2'),
             url('http://cdn.font-store.ir/fonts/yekan/Yekan-Regular.woff') format('woff'),
@@ -37,7 +37,7 @@
 
         * {
             font-family: yekan !important;
-        }
+        } {% endcomment %}
     </style>
     {% block extra_header %}{% endblock %}
 </head>
