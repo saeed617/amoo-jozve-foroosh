@@ -1,7 +1,7 @@
 {% extends 'amoo-jozve-foroosh/top-bar/base.html' %}
 
 {% block menu-right %}
-<a class="item">آگهی‌های من</a>
+<a class="item" href="{% url 'profiles:my_advertises' %}">آگهی‌های من</a>
 {# ui for cart icon here #}
 
 <a class="item" href="{% url 'carts:detail' request.user.cart.id %}">

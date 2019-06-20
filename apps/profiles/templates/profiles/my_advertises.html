@@ -1,0 +1,7 @@
+{% extends 'amoo-jozve-foroosh/base.html' %}
+
+{% block body %}
+    {% for advertise in advertises %}
+        <p>{{ advertise.title }}</p>
+    {% endfor %}
+{% endblock body %}
