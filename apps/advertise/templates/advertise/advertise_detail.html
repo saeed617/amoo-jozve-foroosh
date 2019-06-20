@@ -1,179 +1,179 @@
 {% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}{% load amoo_extras %}{% load i18n %}{% load semanticui %}
 {% block head_title %}
-{{ object.title }}
+    {{ object.title }}
 {% endblock %}
 {% block extra_header %}
-<script src="{% static 'vendor/clipboard/clipboard.min.js' %}"></script>
-<link rel="stylesheet" href="{% static 'vendor/bxslider/bxslider.min.css' %}">
-<script src="{% static 'vendor/bxslider/bxslider.min.js' %}"></script>
+    <script src="{% static 'vendor/clipboard/clipboard.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'vendor/bxslider/bxslider.min.css' %}">
+    <script src="{% static 'vendor/bxslider/bxslider.min.js' %}"></script>
 {% endblock %}
 {% block body %}
-<div class="ui container" style="padding-top: 30px">
-    <div class="ui stackable two column mobile reversed grid">
-        <div class="ui column">
-            <h1 id="productName" class="ui header">{{ object.title }}</h1>
-            <button id="showInfoBtn" onclick="showSellerInfo()" class="ui red button">
-                دریافت اطلاعات فروشنده
-            </button>
-            <div class="ui middle aligned divided large relaxed list">
-                <div id="sellerInfo" class="item" style="display: none">
-                    <div class="right floated content">
-                        <div class="ui mini input">
-                            <input type="text" value="۰۹۳۰۱۲۳۶۵۴۸۷۹" readonly id="phone"/>
+    <div class="ui container" style="padding-top: 30px">
+        <div class="ui stackable two column mobile reversed grid">
+            <div class="ui column">
+                <h1 id="productName" class="ui header">{{ object.title }}</h1>
+                <button id="showInfoBtn" onclick="showSellerInfo()" class="ui red button">
+                    دریافت اطلاعات فروشنده
+                </button>
+                <div class="ui middle aligned divided large relaxed list">
+                    <div id="sellerInfo" class="item" style="display: none">
+                        <div class="right floated content">
+                            <div class="ui mini input">
+                                <input type="text" value="۰۹۳۰۱۲۳۶۵۴۸۷۹" readonly id="phone"/>
+                            </div>
+                            <button class="ui small basic button" id="phone-cp-btn" data-clipboard-target="#phone">
+                                کپی
+                            </button>
+                            <div class="ui mini top center popup transition hidden" id="cp-popup">
+                                {% trans 'Copied!' %}
+                            </div>
                         </div>
-                        <button class="ui small basic button" id="phone-cp-btn" data-clipboard-target="#phone">
-                            کپی
-                        </button>
-                        <div class="ui mini top center popup transition hidden" id="cp-popup">
-                            {% trans 'Copied!' %}
+                        <div class="content">
+                            شماره تماس
                         </div>
                     </div>
-                    <div class="content">
-                        شماره تماس
+                    <div class="item">
+                        <div class="right floated content">
+                            {{ object.get_major_display }}
+                        </div>
+                        <div class="content">
+                            رشته
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="right floated content">
-                        {{ object.get_major_display }}
+                    {% if object.university %}
+                        <div class="item">
+                            <div class="right floated content">
+                                {{ object.university }}
+                            </div>
+                            <div class="content">
+                                دانشگاه
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="item">
+                        <div class="right floated content">
+                            {{ object.county.province.name }} - {{ object.county.name }}
+                        </div>
+                        <div class="content">
+                            محل
+                        </div>
                     </div>
-                    <div class="content">
-                        رشته
+                    <div class="item">
+                        <div class="right floated content">
+                            {{ object.price|persian_digits }}
+                        </div>
+                        <div class="content">
+                            قیمت
+                        </div>
                     </div>
-                </div>
-                {% if object.university %}
-                <div class="item">
-                    <div class="right floated content">
-                        {{ object.university }}
+                    {% if object.page_numbers is not None %}
+                        <div class="item">
+                            <div class="right floated content">
+                                {{ object.page_numbers|persian_digits }}
+                            </div>
+                            <div class="content">
+                                تعداد صفحات
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="item">
+                        <div class="right floated content">
+                            <div class='ui star rating' id="itemRate"></div>
+                        </div>
+                        <div class="content">
+                            امتیاز کاربران
+                        </div>
                     </div>
-                    <div class="content">
-                        دانشگاه
-                    </div>
-                </div>
-                {% endif %}
-                <div class="item">
-                    <div class="right floated content">
-                        {{ object.county.province.name }} - {{ object.county.name }}
-                    </div>
-                    <div class="content">
-                        محل
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="right floated content">
-                        {{ object.price|persian_digits }}
-                    </div>
-                    <div class="content">
-                        قیمت
-                    </div>
-                </div>
-                {% if object.page_numbers is not None %}
-                <div class="item">
-                    <div class="right floated content">
-                        {{ object.page_numbers|persian_digits }}
-                    </div>
-                    <div class="content">
-                        تعداد صفحات
-                    </div>
-                </div>
-                {% endif %}
-                <div class="item">
-                    <div class="right floated content">
-                        <div class='ui star rating' id="itemRate"></div>
-                    </div>
-                    <div class="content">
-                        امتیاز کاربران
-                    </div>
-                </div>
-                <br/><br/>
-                توضیحات
+                    <br/><br/>
+                    توضیحات
 
-                <p id="details">
-                    {{ object.description }}
-                </p>
-            </div>
-            <div class="ui stackable two column mobile reversed grid">
-                <div class="ui row">
-                    <div class="ui left floated column">
-                        <div id="rate" class='ui left floated star rating' style="display: none;"></div>
-                    </div>
-                    <div class="ui right floated column" style="padding: 0">
-                        <div class="ui right floated red icon basic button" onclick="showRating()">
-                            <i class="star icon"></i> امتیاز دهید
+                    <p id="details">
+                        {{ object.description }}
+                    </p>
+                </div>
+                <div class="ui stackable two column mobile reversed grid">
+                    <div class="ui row">
+                        <div class="ui left floated column">
+                            <div id="rate" class='ui left floated star rating' style="display: none;"></div>
+                        </div>
+                        <div class="ui right floated column" style="padding: 0">
+                            <div class="ui right floated red icon basic button" onclick="showRating()">
+                                <i class="star icon"></i> امتیاز دهید
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="bxslider" id="slider">
+                    {% for img in object.advertiseimage_set.all %}
+                        <div class="ui centered image"><img class="ui image" src={{ img.image.url }}></div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <div class="column">
-            <div class="bxslider" id="slider">
-                {% for img in object.advertiseimage_set.all %}
-                <div class="ui centered image"><img class="ui image" src={{ img.image.url }}></div>
-                {% endfor %}
-            </div>
+        <br/>
+        <br/>
+        <div class="ui comments">
+            <h3 class="ui dividing header">نظرات</h3>
+            {% for cm in comments %}
+                {% include 'advertise/snippets/comment.html' with cm=cm %}
+            {% endfor %}
+            {% if request.user.is_authenticated %}
+                <form class="ui form" role="form" method="post"
+                      action="{% url 'advertise:add_comment' pk=object.id %}"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|semanticui_form }}
+                    <button type="submit" class="ui blue button">{% trans 'Add' %}</button>
+                </form>
+            {% endif %}
         </div>
     </div>
-    <br/>
-    <br/>
-    <div class="ui comments">
-        <h3 class="ui dividing header">نظرات</h3>
-        {% for cm in comments %}
-        {% include 'advertise/snippets/comment.html' with cm=cm %}
+    <script>
+        function showSellerInfo() {
+            $('#sellerInfo').css('display', 'block');
+            $("#showInfoBtn").addClass('disabled');
+        }
 
-        {% endfor %}
-    </div>
-    {% if request.user.is_authenticated %}
-    <form class="ui form" role="form" method="post" action="{% url 'advertise:add_comment' pk=object.id %}"
-          enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form|semanticui_form }}
-        <button type="submit" class="ui blue button">{% trans 'Add' %}</button>
-    </form>
-    {% endif %}
-</div>
-<script>
-    function showSellerInfo() {
-        $('#sellerInfo').css('display', 'block');
-        $("#showInfoBtn").addClass('disabled');
-    }
+        $(document).ready(function () {
+            let cb = new ClipboardJS('#phone-cp-btn');
+            $('#phone-cp-btn').popup({popup: $("#cp-popup"), on: 'click'});
 
-    $(document).ready(function () {
-        let cb = new ClipboardJS('#phone-cp-btn');
-        $('#phone-cp-btn').popup({popup: $("#cp-popup"), on: 'click'});
-
+            $('.bxslider').bxSlider({
+                mode: 'fade',
+                auto: true,
+                stopAutoOnClick: true,
+                slideWidth: parent
+            });
+        })
+    </script>
+    <script>
         $('.bxslider').bxSlider({
             mode: 'fade',
             auto: true,
             stopAutoOnClick: true,
             slideWidth: parent
         });
-    })
-</script>
-<script>
-    $('.bxslider').bxSlider({
-        mode: 'fade',
-        auto: true,
-        stopAutoOnClick: true,
-        slideWidth: parent
-    });
-</script>
-<script>
-    $('.ui.rating').rating({
-        initialRating: 4,
-        maxRating: 5,
-        clearable: false,
-        onRate: function (value) {
-            console.log('value set to:' + value);
-        },
+    </script>
+    <script>
+        $('.ui.rating').rating({
+            initialRating: 4,
+            maxRating: 5,
+            clearable: false,
+            onRate: function (value) {
+                console.log('value set to:' + value);
+            },
 
-    });
-    $('.ui.rating')
-        .rating('disable')
-    ;
-</script>
-<script>
-    function showRating() {
-        document.getElementById("rate").style.display = "inline";
-        $('#rate').rating('enable');
-    }
-</script>
+        });
+        $('.ui.rating')
+            .rating('disable')
+        ;
+    </script>
+    <script>
+        function showRating() {
+            document.getElementById("rate").style.display = "inline";
+            $('#rate').rating('enable');
+        }
+    </script>
 {% endblock body %}
