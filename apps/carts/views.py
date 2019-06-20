@@ -31,3 +31,8 @@ class CartRemoveView(View):
 class CartDetailView(LoginRequiredMixin, DetailView):
     model = Cart
     template_name = 'carts/cart_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total'] = sum(advertise.price for advertise in context['object'].advertises.all())
+        return context

@@ -5,5 +5,6 @@
 {% for advertise in object.advertises.all %}
 {% include 'carts/snippets/cart_card.html' with advertise=advertise %}
 {% endfor %}
+<p>{{ total }}</p>
 </div>
 {% endblock body %}
