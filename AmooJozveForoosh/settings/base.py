@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'apps.advertise',
     'apps.profiles',
     'apps.landpage',
-    'django_extensions',
     'apps.carts',
 ]
 
