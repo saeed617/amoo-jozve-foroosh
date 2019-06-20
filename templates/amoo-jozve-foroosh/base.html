@@ -44,11 +44,13 @@
 
 <body dir="rtl">
 
-<div>
+<div id="wrapper">
     {% block top_bar %}
         {% include 'amoo-jozve-foroosh/top-bar/top-bar.html' %}
     {% endblock %}
-    {% block body %}{% endblock %}
+    <div id="body-container">
+        {% block body %}{% endblock %}
+    </div>
     {% block footer %}
         {% include 'amoo-jozve-foroosh/footer/footer.html' %}
     {% endblock footer %}
