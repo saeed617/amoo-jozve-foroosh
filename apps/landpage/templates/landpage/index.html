@@ -23,7 +23,7 @@
             راحت‌تر تحصیل کنید
         </h1>
         <h2>دسترسی به تجربیات دیگران</h2>
-        <div class="ui huge primary button">همین حالا شروع کنید</div>
+        <a href="{% url 'profiles:sign_up' %}" class="ui huge primary button">همین حالا شروع کنید</a>
     </div>
 
 </div>
@@ -36,7 +36,7 @@
                 <p class="land-p">
                     کتاب‌ها و جزوات مورد نیاز خود را با قیمتی پایین‌تر و سرعتی بالاتر تهیه کنید.
                 </p>
-                <a class="ui orange button">بریم ببینیم!</a>
+                <a href="{% url 'profiles:sign_up' %}" class="ui orange button">بریم ببینیم!</a>
             </div>
             <div class="six wide column">
                 <img src="{% static 'landpage/images/icons/books.svg' %}" class="ui medium circular image">
@@ -56,7 +56,7 @@
                 <p class="land-p">
                     می‌تونی با سرعت بالا کتاب ها و جزوه‌های سال‌های پیشتو بفروشی یا با دیگران معاوضه کنی!
                 </p>
-                <a class="ui red button">فروشنده‌ام!</a>
+                <a href="{% url 'profiles:sign_up' %}" class="ui red button">فروشنده‌ام!</a>
             </div>
         </div>
     </div>
