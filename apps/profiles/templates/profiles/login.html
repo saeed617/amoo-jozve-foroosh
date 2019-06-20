@@ -7,18 +7,23 @@
     {% endfor %}
 
 
-
-    <form class="ui form segment" role="form" method="post" action="{% url 'profiles:login' %}">
-        {% csrf_token %}
-        {{ form|semanticui_form }}
+    <div class="ui attached message">
+        <div class="header">
+            خوش آمدید
+        </div>
+    </div>
+    <form class="ui form attached fluid segment" role="form" method="post" action="{% url 'profiles:login' %}">
+    {% csrf_token %}
+    {{ form|semanticui_form }}
 
         <input type="submit" class="ui blue button" value="{% trans 'Login' %}">
         <input type="hidden" name="next" value="{{ next }}">
         <div class="ui error message"></div>
     </form>
 
-
-    <p><a href="{% url 'password_reset' %}">رمز عبور را فراموش کرده اید؟</a></p>
+    <div class="ui bottom attached warning message">
+        <a href="{% url 'password_reset' %}">رمز عبور را فراموش کرده اید؟</a>
+    </div>
 </div>
 <script>
 

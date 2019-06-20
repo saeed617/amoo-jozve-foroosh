@@ -66,6 +66,7 @@
                         قیمت
                     </div>
                 </div>
+                {% if object.page_numbers is not None %}
                 <div class="item">
                     <div class="right floated content">
                         {{ object.page_numbers|persian_digits }}
@@ -74,6 +75,7 @@
                         تعداد صفحات
                     </div>
                 </div>
+                {% endif %}
                 <div class="item">
                     <div class="right floated content">
                         <div class='ui star rating' id="itemRate"></div>
@@ -105,7 +107,7 @@
         <div class="column">
             <div class="bxslider" id="slider">
                 {% for img in object.advertiseimage_set.all %}
-                <div><img class="ui image" src={{ img.image.url }}></div>
+                <div class="ui centered image"><img class="ui image" src={{ img.image.url }}></div>
                 {% endfor %}
             </div>
         </div>

@@ -7,6 +7,9 @@ patterns = [
     url(r'^login/$', auth_views.authenticate_view, name='login'),
     url(r'^sign-up/$', auth_views.UserCreationView.as_view(), name='sign_up'),
     url(r'^logout/$', auth_views.logout_view, name='logout'),
+    url(r'^activation/$',auth_views.wait_activation, name='activation'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        auth_views.activate, name='activate'),
 
 ]
 
