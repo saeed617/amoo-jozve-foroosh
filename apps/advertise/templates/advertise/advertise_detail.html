@@ -107,7 +107,7 @@
         <div class="column">
             <div class="bxslider" id="slider">
                 {% for img in object.advertiseimage_set.all %}
-                <div><img class="ui image" src={{ img.image.url }}></div>
+                <div class="ui centered image"><img class="ui image" src={{ img.image.url }}></div>
                 {% endfor %}
             </div>
         </div>
