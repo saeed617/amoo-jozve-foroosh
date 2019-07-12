@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
@@ -100,3 +101,8 @@ class MyAdvertises(ListView):
 
     def get_queryset(self):
         return Advertise.objects.filter(user=self.request.user)
+
+
+@login_required
+def profile(request):
+    return render(request, 'profiles/profile.html')

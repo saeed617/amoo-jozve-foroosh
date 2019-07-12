@@ -1,7 +1,18 @@
+@import "font-style.css";
 #footer {
     background-color: rgb(240, 240, 240);
 }
 
 .footer.segment {
     padding: 5em 0em;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+#body-container {
+    flex: 1;
 }

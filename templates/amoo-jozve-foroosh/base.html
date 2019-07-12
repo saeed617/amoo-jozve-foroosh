@@ -14,41 +14,20 @@
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/semantic/semantic.min.js' %}"></script>
     <script src="{% static 'vendor/noty/noty.min.js' %}" type="text/javascript"></script>
-    <style>
-        @font-face {
-            font-family: 'yekan';
-            src: url('http://cdn.font-store.ir/fonts/yekan/Yekan-Regular.woff2') format('woff2'),
-            url('http://cdn.font-store.ir/fonts/yekan/Yekan-Regular.woff') format('woff'),
-            url('http://cdn.font-store.ir/fonts/yekan/Yekan-Regular.ttf') format('truetype'),
-            url('http://cdn.font-store.ir/fonts/yekan/Yekan-Regular.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'yekan';
-            src: url('http://cdn.font-store.ir/fonts/yekan/Yekan-Bold.woff2') format('woff2'),
-            url('http://cdn.font-store.ir/fonts/yekan/Yekan-Bold.woff') format('woff'),
-            url('http://cdn.font-store.ir/fonts/yekan/Yekan-Bold.ttf') format('truetype'),
-            url('http://cdn.font-store.ir/fonts/yekan/Yekan-Bold.otf') format('opentype');
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        * {
-            font-family: yekan !important;
-        }
-    </style>
     {% block extra_header %}{% endblock %}
 </head>
 
 <body dir="rtl">
 
-<div>
+<div id="wrapper">
     {% block top_bar %}
         {% include 'amoo-jozve-foroosh/top-bar/top-bar.html' %}
     {% endblock %}
-    {% block body %}{% endblock %}
+    <div id="body-container">
+        {% block body %}{% endblock %}
+    </div>
+
+    <div class="ui hidden divider"></div>
     {% block footer %}
         {% include 'amoo-jozve-foroosh/footer/footer.html' %}
     {% endblock footer %}

@@ -23,5 +23,6 @@ urlpatterns = [
         template_name='profiles/password_reset_confirm.html'), name='password_reset_confirm'),
     url(r'^reset/done/$', PasswordResetCompleteView.as_view(
         template_name='profiles/password_reset_complete.html'), name='password_reset_complete'),
+    url(r'^my-profile/$', auth_views.profile, name='profile'),
     url(r'^', include(patterns, namespace='profiles')),
 ]
