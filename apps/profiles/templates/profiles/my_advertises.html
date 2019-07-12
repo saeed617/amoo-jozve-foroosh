@@ -1,7 +1,18 @@
 {% extends 'amoo-jozve-foroosh/base.html' %}
-
 {% block body %}
-    {% for advertise in advertises %}
-        <p>{{ advertise.title }}</p>
-    {% endfor %}
+<div class="ui container">
+    <div class="ui very relaxed stackable grid">
+        <div class="thirteen wide column">
+
+            <div class="ui special cards">
+                {% for advertise in advertises %}
+                {% include 'advertise/snippets/advertise_card.html' with advertise=advertise %}
+                {% endfor %}
+            </div>
+            <div style="text-align: center; margin-top: 15px    ">
+                {% include 'amoo-jozve-foroosh/pagination.html' with page_obj=page_obj %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock body %}
