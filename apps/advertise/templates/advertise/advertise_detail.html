@@ -205,15 +205,17 @@
                                 });
                             }
                         });
-            {% else %}
-                document.getElementById("rate").style.display = "inline";
-                $('#rate')
-                    .rating('disable',
-                        {
-                            initialRating: {{ rate.first.rate }},
-                        });
-
             {% endif %}
         }
+        {% if rate %}
+            document.getElementById("rate").style.display = "inline";
+            $('#rate')
+                .rating(
+                    {
+                        initialRating: {{ rate.first.rate }},
+                        maxRating: 5
+                    });
+
+        {% endif %}
     </script>
 {% endblock body %}
