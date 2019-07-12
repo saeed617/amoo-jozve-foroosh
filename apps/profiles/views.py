@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
@@ -95,7 +96,7 @@ def wait_activation(request):
     return render(request, 'profiles/wait_activation.html')
 
 
-class MyAdvertises(ListView):
+class MyAdvertises(LoginRequiredMixin, ListView):
     template_name = "profiles/my_advertises.html"
     context_object_name = "advertises"
 
