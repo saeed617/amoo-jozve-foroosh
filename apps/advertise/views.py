@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
@@ -55,8 +56,15 @@ class AdvertiseDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = CommentForm(None)
-        context['rate'] = Rate.objects.filter(user=self.request.user, advertise=self.get_object())
         context['comments'] = Comment.objects.filter(advertise__id=self.get_object().pk).order_by('-timestamp')
+        if self.request.user.is_authenticated:
+            context['rate'] = Rate.objects.filter(user=self.request.user, advertise=self.get_object())
+        sum_rating = Rate.objects.filter(advertise=self.get_object()).aggregate(rating=Sum('rate')).get('rating')
+        sum_count = Rate.objects.filter(advertise=self.get_object()).count()
+        if not sum_count:
+            sum_rating = 0
+            sum_count = 1
+        context['rating'] = sum_rating // sum_count
         return context
 
 
