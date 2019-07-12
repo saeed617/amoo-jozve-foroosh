@@ -1,0 +1,52 @@
+{% extends 'amoo-jozve-foroosh/base.html' %}{% load staticfiles %}
+{% block body %}
+    <div class="ui container">
+        <h1 class="ui header">
+            سبد خرید
+        </h1>
+        {% if object.advertises.all %}
+            <div class="ui special cards">
+                {% for advertise in object.advertises.all %}
+                    {# things to show per advertise in cart #}
+                    <div class="card">
+                        <div class="blurring dimmable image">
+                            <div class="ui dimmer">
+                                <div class="content">
+                                    <div class="center">
+                                        <div class="ui inverted button">نمایش آگهی</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="{{ advertise.advertiseimage_set.first.image.url }}">
+                        </div>
+                        <div class="content">
+                            <a class="header" href="{% url 'advertise:detail' advertise.id %}">{{ advertise.title }}</a>
+                            <div class="meta">
+                                {% if advertise.release_year %}
+                                    <span class="date">{{ advertise.release_year }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {# cart ui button add to cart #}
+                        {% block card_section %}
+                            <div class="extra content">
+                                <form method="post" action="{% url 'carts:remove_from_cart' %}">{% csrf_token %}
+                                    <input type="hidden" name="ad_id" value="{{ advertise.id }}">
+                                    <button class="ui small icon button" type="submit">
+                                        <i class="delete red icon"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        {% endblock %}
+                        {# end cart ui button #}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="ui compact message">
+                <p> سبد خرید شما خالی است</p>
+                <p><a href="{% url 'advertise:list' %}" class="ui big green button">خرید</a></p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock body %}

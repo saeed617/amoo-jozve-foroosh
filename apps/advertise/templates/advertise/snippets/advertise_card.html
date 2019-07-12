@@ -1,27 +1,30 @@
 {% load staticfiles %}
 <div class="card">
-    <div class="blurring dimmable image">
-        <div class="ui dimmer">
-            <div class="content">
-                <div class="center">
-                    <div class="ui inverted button">نمایش آگهی</div>
-                </div>
-            </div>
-        </div>
-        <img src="{% static '/advertise/images/jozve.jpg' %}">
+    <div class="image">
+        <img src="{{ advertise.advertiseimage_set.first.image.url }}">
     </div>
     <div class="content">
         <a class="header" href="{% url 'advertise:detail' advertise.id %}">{{ advertise.title }}</a>
-        <div class="meta">
-            {% if advertise.release_year %}
-            <span class="date">{{ advertise.release_year }}</span>
-            {% endif %}
-        </div>
+        {% if advertise.release_year %}
+            <div class="meta">
+                <span class="date">{{ advertise.release_year }}</span>
+            </div>
+        {% endif %}
     </div>
-    <div class="extra content">
-        <a>
-            <i class="users icon"></i>
-            افزودن به سبد خرید
-        </a>
-    </div>
+    {# cart ui button add to cart #}
+    {% block card_section %}
+        {% if advertise not in request.user.cart.advertises.all and request.user.is_authenticated %}
+            <div class="extra content">
+                <form method="post" action="{% url 'carts:add_to_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="ad_id" value="{{ advertise.id }}">
+                    <button class="ui small icon button" type="submit" title="اضافه کردن به سبد خرید">
+                        <i class="shopping bag icon"></i>
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+
+    {% endblock %}
+    {# end cart ui button #}
 </div>

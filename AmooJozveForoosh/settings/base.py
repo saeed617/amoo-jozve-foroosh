@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'apps.utils',
     'apps.advertise',
     'apps.profiles',
+    'apps.landpage',
+    'apps.carts',
 ]
 
 MIDDLEWARE = [

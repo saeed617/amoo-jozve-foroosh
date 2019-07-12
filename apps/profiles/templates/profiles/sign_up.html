@@ -3,11 +3,12 @@
 {% block body %}
 <div class="ui text container" style="margin: 30px;">
 
-    <form class="ui form" role="form" method="post" action="{% url 'profiles:sign_up' %}">
+    <form class="ui form segment" role="form" method="post" action="{% url 'profiles:sign_up' %}">
         {% csrf_token %}
         {{ form|semanticui_form }}
 
         <input type="submit" class="ui blue button" value="{% trans 'Sign_up' %}">
+        <a href="{% url 'profiles:login' %}">حساب کاربری دارید؟</a>
         <input type="hidden" name="next" value="{{ next }}">
     </form>
 
