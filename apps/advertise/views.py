@@ -34,7 +34,7 @@ class AdvertiseListView(ListView):
         if county:
             county = int(county)
             qs = qs.filter(county__id=county)
-        return qs.order_by('-created_at')
+        return qs.filter(state=Advertise.PUBLISHED).order_by('-created_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -107,7 +107,7 @@ class CommentCreateView(LoginRequiredMixin, FormView):
     form_class = CommentForm
 
     def get_success_url(self):
-        return reverse('advertise:detail', args=(self.kwargs.get('pk')))
+        return reverse('advertise:detail', args=(self.kwargs.get('pk'), ))
 
     def form_valid(self, form):
         comment = form.save(commit=False)

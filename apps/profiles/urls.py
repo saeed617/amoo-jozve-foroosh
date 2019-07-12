@@ -10,6 +10,7 @@ patterns = [
     url(r'^activation/$',auth_views.wait_activation, name='activation'),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         auth_views.activate, name='activate'),
+    url(r'^my-advertises/$', auth_views.MyAdvertises.as_view(), name='my_advertises'),
 
 ]
 
@@ -22,5 +23,6 @@ urlpatterns = [
         template_name='profiles/password_reset_confirm.html'), name='password_reset_confirm'),
     url(r'^reset/done/$', PasswordResetCompleteView.as_view(
         template_name='profiles/password_reset_complete.html'), name='password_reset_complete'),
+    url(r'^my-profile/$', auth_views.profile, name='profile'),
     url(r'^', include(patterns, namespace='profiles')),
 ]

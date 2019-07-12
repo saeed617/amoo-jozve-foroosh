@@ -7,6 +7,8 @@
     {# stylesheets  #}
     <link rel="stylesheet" href="{% static 'vendor/noty/noty.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/semantic/semantic.rtl.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     {# scripts #}
     {# order matters jquery semantic #}
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
@@ -17,12 +19,17 @@
 
 <body dir="rtl">
 
-<div>
+<div id="wrapper">
     {% block top_bar %}
         {% include 'amoo-jozve-foroosh/top-bar/top-bar.html' %}
     {% endblock %}
-    {% block body %}{% endblock %}
+    <div id="body-container">
+        {% block body %}{% endblock %}
+    </div>
+
+    <div class="ui hidden divider"></div>
     {% block footer %}
+        {% include 'amoo-jozve-foroosh/footer/footer.html' %}
     {% endblock footer %}
 </div>
 <script>

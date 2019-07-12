@@ -1,0 +1,16 @@
+{% load staticfiles%}{% load amoo_extras %}
+<div class="ui segment ">
+    <div class="ui placeholder">
+        <div class="comment">
+            <div class="content">
+                <a class="author">{{ cm.author.email }}</a>
+                <div class="metadata">
+                    <span class="date">{{ cm.timestamp|jalali_date }}</span>
+                </div>
+                <div class="text">
+                    {{ cm.text }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

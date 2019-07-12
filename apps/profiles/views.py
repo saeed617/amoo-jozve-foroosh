@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
@@ -6,11 +8,12 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 
+from apps.advertise.models import Advertise
 from .tokens import profile_activation_token
 from .forms import AuthenticationForm
 from .forms import UserCreationForm
@@ -91,3 +94,16 @@ def activate(request, uidb64, token):
 
 def wait_activation(request):
     return render(request, 'profiles/wait_activation.html')
+
+
+class MyAdvertises(LoginRequiredMixin, ListView):
+    template_name = "profiles/my_advertises.html"
+    context_object_name = "advertises"
+
+    def get_queryset(self):
+        return Advertise.objects.filter(user=self.request.user)
+
+
+@login_required
+def profile(request):
+    return render(request, 'profiles/profile.html')
