@@ -55,8 +55,8 @@ class AdvertiseDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = CommentForm(None)
-        context['comments'] = Comment.objects.filter(advertise__id=self.get_object().pk)
         context['rate'] = Rate.objects.filter(user=self.request.user, advertise=self.get_object())
+        context['comments'] = Comment.objects.filter(advertise__id=self.get_object().pk).order_by('-timestamp')
         return context
 
 
