@@ -6,6 +6,8 @@
     <script src="{% static 'vendor/clipboard/clipboard.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'vendor/bxslider/bxslider.min.css' %}">
     <script src="{% static 'vendor/bxslider/bxslider.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static "css/rating.min.css" %}">
+    <script type="text/javascript" src="{% static "js/rating.min.js" %}"></script>
 {% endblock %}
 {% block body %}
     <div class="ui container" style="padding-top: 30px">
@@ -93,14 +95,22 @@
                 </div>
                 <div class="ui stackable two column mobile reversed grid">
                     <div class="ui row">
-                        <div class="ui left floated column">
-                            <div id="rate" class='ui left floated star rating' style="display: none;"></div>
-                        </div>
-                        <div class="ui right floated column" style="padding: 0">
-                            <div class="ui right floated red icon basic button" onclick="showRating()">
-                                <i class="star icon"></i> امتیاز دهید
+                        {% if not rate %}
+                            <div class="ui left floated column">
+                                <div id="rate" class='ui left floated star rating' style="display: none;"></div>
                             </div>
-                        </div>
+                            <div class="ui right floated column" style="padding: 0">
+                                <div id="rate-btn" class="ui right floated red icon basic button"
+                                     onclick="showRating()">
+                                    <i class="star icon"></i> امتیاز دهید
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="ui left floated column">
+                                امتیاز شما:
+                                <div id="rate" class='ui left floated star rating'></div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -172,8 +182,38 @@
     </script>
     <script>
         function showRating() {
-            document.getElementById("rate").style.display = "inline";
-            $('#rate').rating('enable');
+            {% if not rate %}
+                document.getElementById("rate").style.display = "inline";
+                $('#rate')
+                    .rating(
+                        {
+                            initialRating: 0,
+                            maxRating: 5,
+                            onRate: function (value) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "{% url 'advertise:rating' advertise.id %}",
+                                    data: {
+                                        rate: value,
+                                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                                    },
+                                    success: function () {
+                                        $('#rate')
+                                            .rating('disable');
+                                        $('#rate-btn').css('display', 'none')
+                                    }
+                                });
+                            }
+                        });
+            {% else %}
+                document.getElementById("rate").style.display = "inline";
+                $('#rate')
+                    .rating('disable',
+                        {
+                            initialRating: {{ rate.first.rate }},
+                        });
+
+            {% endif %}
         }
     </script>
 {% endblock body %}

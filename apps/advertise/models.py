@@ -94,3 +94,12 @@ class Comment(models.Model):
     def approve(self):
         self.approved = True
         self.save()
+
+
+class Rate(models.Model):
+    advertise = models.ForeignKey(Advertise, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rate = models.SmallIntegerField()
+
+    def __str__(self):
+        return "{} - {} - {}".format(self.advertise.title, self.user.email, self.rate)
