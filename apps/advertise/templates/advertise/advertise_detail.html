@@ -95,21 +95,23 @@
                 </div>
                 <div class="ui stackable two column mobile reversed grid">
                     <div class="ui row">
-                        {% if not rate %}
-                            <div class="ui left floated column">
-                                <div id="rate" class='ui left floated star rating' style="display: none;"></div>
-                            </div>
-                            <div class="ui right floated column" style="padding: 0">
-                                <div id="rate-btn" class="ui right floated red icon basic button"
-                                     onclick="showRating()">
-                                    <i class="star icon"></i> امتیاز دهید
+                        {% if request.user.is_authenticated %}
+                            {% if not rate %}
+                                <div class="ui left floated column">
+                                    <div id="rate" class='ui left floated star rating' style="display: none;"></div>
                                 </div>
-                            </div>
-                        {% else %}
-                            <div class="ui left floated column">
-                                امتیاز شما:
-                                <div id="rate" class='ui left floated star rating'></div>
-                            </div>
+                                <div class="ui right floated column" style="padding: 0">
+                                    <div id="rate-btn" class="ui right floated red icon basic button"
+                                         onclick="showRating()">
+                                        <i class="star icon"></i> امتیاز دهید
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="ui left floated column">
+                                    امتیاز شما:
+                                    <div id="rate" class='ui left floated star rating'></div>
+                                </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
@@ -167,18 +169,12 @@
         });
     </script>
     <script>
-        $('.ui.rating').rating({
-            initialRating: 4,
+        $('#itemRate').rating({
+            initialRating: {{ rating|default_if_none:0 }},
             maxRating: 5,
-            clearable: false,
-            onRate: function (value) {
-                console.log('value set to:' + value);
-            },
-
         });
-        $('.ui.rating')
-            .rating('disable')
-        ;
+        $('#itemRate')
+            .rating('disable');
     </script>
     <script>
         function showRating() {
@@ -215,6 +211,9 @@
                         initialRating: {{ rate.first.rate }},
                         maxRating: 5
                     });
+            $('#rate')
+                .rating('disable');
+
 
         {% endif %}
     </script>
