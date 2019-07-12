@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Profile</title>
-    <link
-            rel="stylesheet"
-            href="https://cdn.rtlcss.com/semantic-ui/2.4.1/semantic.rtl.min.css"
-            integrity="sha384-yXUIpeQfH3cuk6u6Mwu8uyJXB2R3UOLvcha1343UCMA2TA7lQ14BFmrudI6LAP8A"
-            crossorigin="anonymous">
+{% extends 'amoo-jozve-foroosh/base.html' %}
+
+{% block extra_header %}
     <style>
         .ui.submitBtn {
             margin-bottom: 2em;
             margin-top: 2em;
         }
+
         .ui.profTab {
             margin: 0;
             padding: 0;
         }
+
         .iconBackground {
             background-color: #F8F8F8;
             border-bottom: 1px solid #00B5AD;
@@ -26,26 +19,28 @@
             margin: 0;
         }
     </style>
-</head>
+{% endblock %}
 
-<body dir="rtl" style="background-color: #EEEEEE">
+{% block body %}
+
     <div class="ui stackable mobile grid container" style="margin-top: 3em">
         <div class="four wide column">
-                <div class="ui vertical large menu">
-                    <a class="pink item active" data-tab="userInfo">
-                        اطلاعات کاربری
-                        <i class="ui user outline icon" style="float: right; margin-left: 1em; margin-right: 0"></i>
-                    </a>
-                    <a class="pink item" data-tab="userAdvertises">
-                        <i class="ui file alternate outline icon" style="float: right; margin-left: 1em; margin-right: 0"></i>
-                        آگهی های من
-                    </a>
-                    <a class="pink item" data-tab="resetPass">
-                        <i class="ui key icon" style="float: right; margin-left: 1em; margin-right: 0"></i>
-                        تغییر رمز عبور
-                    </a>
-                </div>
+            <div class="ui vertical large menu">
+                <a class="pink item active" data-tab="userInfo">
+                    اطلاعات کاربری
+                    <i class="ui user outline icon" style="float: right; margin-left: 1em; margin-right: 0"></i>
+                </a>
+                <a class="pink item" data-tab="userAdvertises">
+                    <i class="ui file alternate outline icon"
+                       style="float: right; margin-left: 1em; margin-right: 0"></i>
+                    آگهی های من
+                </a>
+                <a class="pink item" data-tab="resetPass">
+                    <i class="ui key icon" style="float: right; margin-left: 1em; margin-right: 0"></i>
+                    تغییر رمز عبور
+                </a>
             </div>
+        </div>
         <div class="twelve wide column">
             <div class="ui active transition fade in tab center aligned segment profTab" data-tab="userInfo">
                 <div class="iconBackground"></div>
@@ -122,6 +117,5 @@
     <script>
         $('.menu .item').tab();
     </script>
-</body>
-
-</html>
+    
+{% endblock body %}
