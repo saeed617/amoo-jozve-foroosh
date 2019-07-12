@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
@@ -91,3 +92,8 @@ def activate(request, uidb64, token):
 
 def wait_activation(request):
     return render(request, 'profiles/wait_activation.html')
+
+
+@login_required
+def profile(request):
+    return render(request, 'profiles/profile.html')
