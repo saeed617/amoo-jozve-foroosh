@@ -10,7 +10,7 @@ from apps.carts.models import Cart
 
 
 class CartCreateView(View):
-    def post(self, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         user = self.request.user
         advertise_id = self.request.POST.get('ad_id')
         advertise = Advertise.objects.get(pk=advertise_id)
@@ -20,7 +20,7 @@ class CartCreateView(View):
 
 
 class CartRemoveView(View):
-    def post(self, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         user = self.request.user
         advertise_id = self.request.POST.get('ad_id')
         advertise = Advertise.objects.get(pk=advertise_id)
@@ -34,9 +34,7 @@ class CartDetailView(LoginRequiredMixin, View):
     def get(self, request,  pk):
         template_name = 'carts/cart_detail.html'
         cart = get_object_or_404(Cart, id=pk)
-        advertises = cart.advertises.all()
-        total = sum(advertise.price for advertise in advertises)
-        context = {'object': cart, 'total': total, 'advertises':advertises}
+        context = {'object': cart}
         if cart.user != self.request.user:
             raise Http404
         return render(request, template_name, context=context)
