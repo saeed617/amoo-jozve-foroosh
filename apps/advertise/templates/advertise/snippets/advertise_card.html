@@ -11,6 +11,7 @@
             </div>
         {% endif %}
     </div>
+
     {# cart ui button add to cart #}
     {% block card_section %}
         {% if advertise not in request.user.cart.advertises.all and request.user.is_authenticated %}

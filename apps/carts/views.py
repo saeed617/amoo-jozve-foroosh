@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.http import Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import DetailView
 from django.views.generic.base import View
@@ -9,7 +10,7 @@ from apps.carts.models import Cart
 
 
 class CartCreateView(View):
-    def post(self, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         user = self.request.user
         advertise_id = self.request.POST.get('ad_id')
         advertise = Advertise.objects.get(pk=advertise_id)
@@ -19,7 +20,7 @@ class CartCreateView(View):
 
 
 class CartRemoveView(View):
-    def post(self, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         user = self.request.user
         advertise_id = self.request.POST.get('ad_id')
         advertise = Advertise.objects.get(pk=advertise_id)
@@ -28,6 +29,12 @@ class CartRemoveView(View):
         return redirect(reverse('carts:detail', args=(cart.id,)))
 
 
-class CartDetailView(LoginRequiredMixin, DetailView):
-    model = Cart
-    template_name = 'carts/cart_detail.html'
+class CartDetailView(LoginRequiredMixin, View):
+
+    def get(self, request,  pk):
+        template_name = 'carts/cart_detail.html'
+        cart = get_object_or_404(Cart, id=pk)
+        context = {'object': cart}
+        if cart.user != self.request.user:
+            raise Http404
+        return render(request, template_name, context=context)

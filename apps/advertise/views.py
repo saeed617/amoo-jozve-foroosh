@@ -1,12 +1,16 @@
+from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, FormView, CreateView
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import render, get_object_or_404
 
 from apps.advertise.forms import CommentForm
-from apps.advertise.models import Province, County, University, Comment
+from apps.advertise.models import Province, County, University, Comment, Rate
+from apps.utils.decorators import require_ajax
 from .models import Advertise
 from .forms import AdvertiseForm, AdvertiseImageFormSet
 
@@ -52,7 +56,15 @@ class AdvertiseDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = CommentForm(None)
-        context['comments'] = Comment.objects.filter(advertise__id=self.get_object().pk)
+        context['comments'] = Comment.objects.filter(advertise__id=self.get_object().pk).order_by('-timestamp')
+        if self.request.user.is_authenticated:
+            context['rate'] = Rate.objects.filter(user=self.request.user, advertise=self.get_object())
+        sum_rating = Rate.objects.filter(advertise=self.get_object()).aggregate(rating=Sum('rate')).get('rating')
+        sum_count = Rate.objects.filter(advertise=self.get_object()).count()
+        if not sum_count:
+            sum_rating = 0
+            sum_count = 1
+        context['rating'] = sum_rating // sum_count
         return context
 
 
@@ -107,7 +119,7 @@ class CommentCreateView(LoginRequiredMixin, FormView):
     form_class = CommentForm
 
     def get_success_url(self):
-        return reverse('advertise:detail', args=(self.kwargs.get('pk'), ))
+        return reverse('advertise:detail', args=(self.kwargs.get('pk'),))
 
     def form_valid(self, form):
         comment = form.save(commit=False)
@@ -121,3 +133,14 @@ class CommentCreateView(LoginRequiredMixin, FormView):
         messages.add_message(self.request, messages.ERROR, _('Please correct the following errors.'))
         return super().form_invalid(form)
 
+
+@login_required
+@require_ajax
+def rating(request, advertise_id):
+    advertise = get_object_or_404(Advertise, id=advertise_id)
+    rate = request.POST.get('rate')
+    if not Rate.objects.filter(advertise=advertise, user=request.user).exists():
+        Rate.objects.create(advertise=advertise, user=request.user, rate=rate)
+        return JsonResponse({'status': 'ok'})
+    else:
+        return JsonResponse({'status': 'ko'})
