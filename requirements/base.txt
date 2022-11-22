@@ -1,4 +1,4 @@
 Django==1.11
-Pillow==5.4.1
+Pillow==9.3.0
 git+https://github.com/saeed617/django-semanticui-form.git
 django-extensions==2.1.6
